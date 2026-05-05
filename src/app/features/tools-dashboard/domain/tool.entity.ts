@@ -21,5 +21,5 @@ export function createTool(params: Tool): Tool {
 }
 
 export function isToolCategory(value: string): value is ToolCategory {
-  return ['finanzas', 'calculadoras', 'conversores', 'utilidades'].includes(value);
+  return ['finanzas', 'calculadoras', 'conversores', 'utilidades', 'prestamype'].includes(value);
 }

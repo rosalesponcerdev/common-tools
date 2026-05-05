@@ -7,7 +7,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Calcula precios finales con márgenes, descuentos e IVA',
     icon: '💰',
     category: 'finanzas',
-    route: 'tools/calculator-price',
+    route: '/tools/calculator-price',
   },
   {
     id: 'calculator-prestamo',
@@ -15,7 +15,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Simula préstamos y calcula cuotas mensuales',
     icon: '🏦',
     category: 'finanzas',
-    route: 'tools/calculator-prestamo',
+    route: '/tools/calculator-prestamo',
   },
   {
     id: 'conversor-unidades',
@@ -23,7 +23,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convierte entre diferentes unidades de medida',
     icon: '📐',
     category: 'conversores',
-    route: 'tools/conversor-unidades',
+    route: '/tools/conversor-unidades',
   },
   {
     id: 'calculator-iva',
@@ -31,7 +31,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Calcula el IVA de tus productos y servicios',
     icon: '🧾',
     category: 'calculadoras',
-    route: 'tools/calculator-iva',
+    route: '/tools/calculator-iva',
   },
   {
     id: 'calculator-bmi',
@@ -39,7 +39,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Calcula tu índice de masa corporal',
     icon: '⚖️',
     category: 'calculadoras',
-    route: 'tools/calculator-bmi',
+    route: '/tools/calculator-bmi',
   },
   {
     id: 'cronometro',
@@ -47,7 +47,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Medidor de tiempo con funciones de pausa y vuelta',
     icon: '⏱️',
     category: 'utilidades',
-    route: 'tools/cronometro',
+    route: '/tools/cronometro',
   },
   {
     id: 'generador-qr',
@@ -55,7 +55,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Crea códigos QR para enlaces y texto',
     icon: '📱',
     category: 'utilidades',
-    route: 'tools/generador-qr',
+    route: '/tools/generador-qr',
   },
   {
     id: 'conversor-moneda',
@@ -63,6 +63,38 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convierte entre diferentes monedas',
     icon: '💱',
     category: 'conversores',
-    route: 'tools/conversor-moneda',
+    route: '/tools/conversor-moneda',
+  },
+  {
+    id: 'prestamype-factoring',
+    name: 'Calculadora de Factoring',
+    description: 'Simula descuentos de facturas en factoring',
+    icon: '📄',
+    category: 'prestamype',
+    route: '/tools/prestamype/factoring',
+  },
+  {
+    id: 'prestamype-simulador-tea',
+    name: 'Simulador TEA',
+    description: 'Calcula tasa efectiva anual',
+    icon: '📈',
+    category: 'prestamype',
+    route: '/tools/prestamype/simulador-tea',
+  },
+  {
+    id: 'prestamype-flujo-caja',
+    name: 'Calculadora de Flujo de Caja',
+    description: 'Proyecta flujos de efectivo',
+    icon: '💵',
+    category: 'prestamype',
+    route: '/tools/prestamype/flujo-caja',
+  },
+  {
+    id: 'prestamype-descuento',
+    name: 'Calculadora de Descuento',
+    description: 'Calcula descuentos comerciales',
+    icon: '🏷️',
+    category: 'prestamype',
+    route: '/tools/prestamype/descuento',
   },
 ];

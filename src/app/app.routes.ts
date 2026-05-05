@@ -3,11 +3,16 @@ import { TOOLS_DASHBOARD_ROUTES } from './features/tools-dashboard';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'tools',
     loadChildren: () => TOOLS_DASHBOARD_ROUTES,
   },
   {
+    path: '',
+    redirectTo: 'tools',
+    pathMatch: 'full',
+  },
+  {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'tools',
   },
 ];
