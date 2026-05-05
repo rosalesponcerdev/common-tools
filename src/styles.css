@@ -1,3 +1,124 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+@theme {
+  /* Core Colors - High Contrast */
+  --color-app-bg: #F8F9FA;
+  --color-app-surface: #FFFFFF;
+  --color-app-text: #111827;
+  --color-app-text-secondary: #4B5563;
+  --color-app-muted: #6B7280;
+  --color-app-border: #E5E7EB;
+
+  /* Brand Colors */
+  --color-app-primary: #059669;
+  --color-app-primary-hover: #047857;
+  --color-app-primary-light: #D1FAE5;
+
+  /* Accent Colors */
+  --color-app-success: #059669;
+  --color-app-success-light: #D1FAE5;
+  --color-app-warning: #D97706;
+  --color-app-warning-light: #FEF3C7;
+  --color-app-error: #DC2626;
+  --color-app-error-light: #FEE2E2;
+
+  /* Dark Mode */
+  --color-app-dark-bg: #0F172A;
+  --color-app-dark-surface: #1E293B;
+  --color-app-dark-text: #F1F5F9;
+  --color-app-dark-text-secondary: #CBD5E1;
+  --color-app-dark-muted: #94A3B8;
+  --color-app-dark-border: #334155;
+  --color-app-dark-primary: #34D399;
+  --color-app-dark-primary-hover: #6EE7B7;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Geist Mono', monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    @apply bg-app-bg text-app-text antialiased;
+    @apply dark:bg-app-dark-bg dark:text-app-dark-text;
+  }
+}
+
+@layer utilities {
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Component Classes - Note: Use directly in templates, not with @apply */
+.app-container {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .app-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.app-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--color-app-border);
+  border-top-color: var(--color-app-primary);
+  border-radius: 9999px;
+  animation: spin 0.8s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .app-spinner {
+    border-color: var(--color-app-dark-border);
+    border-top-color: var(--color-app-dark-primary);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
