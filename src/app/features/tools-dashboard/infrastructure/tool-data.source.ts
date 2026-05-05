@@ -1,0 +1,68 @@
+import { Tool } from '../domain';
+
+export const TOOLS_DATA: Tool[] = [
+  {
+    id: 'calculator-price',
+    name: 'Calculadora de Precio',
+    description: 'Calcula precios finales con márgenes, descuentos e IVA',
+    icon: '💰',
+    category: 'finanzas',
+    route: 'tools/calculator-price',
+  },
+  {
+    id: 'calculator-prestamo',
+    name: 'Calculadora de Préstamo',
+    description: 'Simula préstamos y calcula cuotas mensuales',
+    icon: '🏦',
+    category: 'finanzas',
+    route: 'tools/calculator-prestamo',
+  },
+  {
+    id: 'conversor-unidades',
+    name: 'Conversor de Unidades',
+    description: 'Convierte entre diferentes unidades de medida',
+    icon: '📐',
+    category: 'conversores',
+    route: 'tools/conversor-unidades',
+  },
+  {
+    id: 'calculator-iva',
+    name: 'Calculadora de IVA',
+    description: 'Calcula el IVA de tus productos y servicios',
+    icon: '🧾',
+    category: 'calculadoras',
+    route: 'tools/calculator-iva',
+  },
+  {
+    id: 'calculator-bmi',
+    name: 'Calculadora de BMI',
+    description: 'Calcula tu índice de masa corporal',
+    icon: '⚖️',
+    category: 'calculadoras',
+    route: 'tools/calculator-bmi',
+  },
+  {
+    id: 'cronometro',
+    name: 'Cronómetro',
+    description: 'Medidor de tiempo con funciones de pausa y vuelta',
+    icon: '⏱️',
+    category: 'utilidades',
+    route: 'tools/cronometro',
+  },
+  {
+    id: 'generador-qr',
+    name: 'Generador QR',
+    description: 'Crea códigos QR para enlaces y texto',
+    icon: '📱',
+    category: 'utilidades',
+    route: 'tools/generador-qr',
+  },
+  {
+    id: 'conversor-moneda',
+    name: 'Conversor de Moneda',
+    description: 'Convierte entre diferentes monedas',
+    icon: '💱',
+    category: 'conversores',
+    route: 'tools/conversor-moneda',
+  },
+];

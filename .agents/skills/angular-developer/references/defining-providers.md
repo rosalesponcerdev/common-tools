@@ -70,3 +70,53 @@ export function provideAnalytics(config: AnalyticsConfig): Provider[] {
   return [{provide: ANALYTICS_CONFIG, useValue: config}, AnalyticsService];
 }
 ```
+
+## Feature Providers Pattern (Recommended)
+
+For feature-based architecture, export a `provide*` function that returns all dependencies for the feature:
+
+```ts
+// features/tools-dashboard/tools.providers.ts
+import { Provider } from '@angular/core';
+import { ToolInMemoryRepository } from './infrastructure';
+import { FilterToolsUseCase, GetToolByIdUseCase, GetToolsUseCase } from './application';
+import { ToolsDashboardFacade } from './presentation';
+import { ToolRepository } from './domain';
+
+export const provideTools = (): Provider[] => {
+  return [
+    GetToolsUseCase,
+    FilterToolsUseCase,
+    GetToolByIdUseCase,
+    ToolsDashboardFacade,
+    {
+      provide: ToolRepository,
+      useClass: ToolInMemoryRepository,
+    },
+  ];
+};
+```
+
+### Usage in Routes
+
+```ts
+// features/tools-dashboard/tools.routes.ts
+import { Routes } from '@angular/router';
+import { provideTools } from './tools.providers';
+
+export const TOOLS_ROUTES: Routes = [
+  {
+    path: '',
+    providers: provideTools(),
+    loadComponent: () => import('./presentation/pages/tools-dashboard.page').then(m => m.ToolsDashboardPage),
+  },
+];
+```
+
+### Benefits
+
+- **Single Source**: All feature dependencies defined in one place
+- **Scoped**: Providers only available when feature is loaded (lazy loading)
+- **Replaceable**: Easy to swap implementations (e.g., `ToolInMemoryRepository` → `ToolHttpRepository`)
+- **Testable**: Mock providers can be provided in tests by overriding
+```
