@@ -1,7 +1,7 @@
-import { inject, computed, signal, Inject, Injectable } from '@angular/core';
-import { Tool, ToolCategory, TOOL_CATEGORIES, ToolFilter } from '../../domain';
-import { GetToolsUseCase, FilterToolsUseCase } from '../../application';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { form, maxLength, PathKind, required, SchemaPathTree } from '@angular/forms/signals';
+import { FilterToolsUseCase, GetToolsUseCase } from '../../application';
+import { Tool, TOOL_CATEGORIES, ToolCategory, ToolFilter } from '../../domain';
 
 export interface ToolsDashboardState {
   searchQuery: string;

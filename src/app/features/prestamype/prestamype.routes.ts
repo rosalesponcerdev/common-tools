@@ -7,7 +7,7 @@ export const PRESTAMYPE_ROUTES: Routes = [
     providers: providePrestamype(),
     loadComponent: () =>
       import('./presentation/pages/factoring-calculator.page').then(
-        (m) => m.FactoringCalculatorPage
+        (m) => m.FactoringCalculatorPage,
       ),
   },
 ];

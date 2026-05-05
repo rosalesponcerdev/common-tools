@@ -1,19 +1,60 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
-import { ToolCategory } from '../../domain';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormField } from '@angular/forms/signals';
 import { ToolCardComponent } from '../components/tool-card.component';
 import { ToolsDashboardFacade } from '../facades/tools-dashboard.facade';
-import { FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-tools-dashboard-page',
   imports: [ToolCardComponent, FormField],
+  styles: [
+    `
+      .select-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+      .select-wrapper select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 12px 40px 12px 16px;
+        font-size: 16px;
+      }
+      .select-wrapper::after {
+        content: '';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        pointer-events: none;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid #71717a;
+        border-bottom: 2px solid #71717a;
+        transform: translateY(-50%) rotate(45deg);
+      }
+      :host-context(.dark) .select-wrapper::after {
+        border-right-color: #a1a1aa;
+        border-bottom-color: #a1a1aa;
+      }
+      .select-styles {
+        width: 100%;
+        background: white;
+        border: 1px solid #e4e4e7;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        color: #18181b;
+      }
+      :host-context(.dark) .select-styles {
+        background: #27272a;
+        border-color: #3f3f46;
+        color: #f4f4f5;
+      }
+      .select-styles:focus {
+        outline: none;
+        ring: 2px solid #6366f1;
+        border-color: transparent;
+      }
+    `,
+  ],
   template: `
     <div class="min-h-screen flex flex-col items-center justify-start py-12 px-4">
       <div class="w-full max-w-6xl">
@@ -34,14 +75,13 @@ import { FormField } from '@angular/forms/signals';
               class="w-full pl-11 pr-4 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
             />
           </div>
-          <select
-            [formField]="facade.toolsDashboardForm.category"
-            class="px-4 py-3 pr-10 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-zinc-900 dark:text-zinc-100 cursor-pointer"
-          >
-            @for (category of facade.categories; track category.value) {
-              <option [value]="category.value">{{ category.label }}</option>
-            }
-          </select>
+          <div class="select-wrapper flex-1 sm:flex-none relative">
+            <select [formField]="facade.toolsDashboardForm.category" class="select-styles">
+              @for (category of facade.categories; track category.value) {
+                <option [value]="category.value">{{ category.label }}</option>
+              }
+            </select>
+          </div>
         </div>
 
         @if (facade.isLoading()) {
