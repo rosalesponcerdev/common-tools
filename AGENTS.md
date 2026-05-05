@@ -1,6 +1,20 @@
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
 
+## Angular Skills
+
+This project includes specialized skills that MUST be used for specific tasks. Use the `skill` tool to load them:
+
+- **angular-developer**: For Angular code generation, components, services, signals, dependency injection, routing, SSR, accessibility, animations, styling, testing, or CLI tooling. Also use for architectural guidance on patterns like ports/adapters, clean architecture, use cases, domain layer, application layer, infrastructure, presentation.
+- **angular21-architecture**: Enterprise architecture for Angular 21+ projects with hexagonal architecture, DDD, Signals, standalone components, OnPush and zoneless.
+- **tailwind-css-patterns**: For utility-first styling, responsive design, layout utilities, flexbox, grid, typography, colors.
+- **accessibility**: For WCAG 2.2 audits, screen reader support, keyboard navigation, ARIA attributes.
+- **seo**: For search engine optimization, meta tags, structured data, sitemaps.
+- **git-commit**: For creating conventional commits with intelligent staging and message generation.
+- **vitest**: For Vitest unit testing, mocking, coverage configuration.
+- **nodejs-backend-patterns**: For Node.js backend services, REST APIs, GraphQL backends, microservices.
+- **typescript-advanced-types**: For complex TypeScript types, generics, conditional types, mapped types.
+
 ## TypeScript Best Practices
 
 - Use strict type checking
