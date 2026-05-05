@@ -509,7 +509,8 @@ form(
 | Error Scenario         | WRONG (Common Mistake)                        | RIGHT (Correct Way)                                         |
 | :--------------------- | :-------------------------------------------- | :---------------------------------------------------------- |
 | **Accessing Flags**    | `form.field.valid()`                          | `form.field().valid()`                                      |
-| **Accessing value**    | `form.field.value()`                          | `form.field().value()`                                      |
+| **Accessing value in facade** | `form.field.value()`                          | `form.field().value()` - call first to get FieldState |
+| **Accessing value in template** | `form.field().value()`                       | With `[formField]` directive, NO manual value access needed - just bind `form.field` for inputs |
 | **Setting value**      | `form.field.set(x)`                           | Update model signal: `this.model.update(...)`               |
 | **Form root flags**    | `form.invalid()`                              | `form().invalid()`                                          |
 | **Double-calling**     | `form.field()()`                              | `form.field().value()`                                      |
@@ -532,6 +533,111 @@ form(
 | **Null in model**      | `signal({ name: null })`                      | `signal({ name: '' })` or `signal({ age: 0 })`              |
 | **Validate syntax**    | `validate(s.field, { value } => ...)`         | `validate(s.field, ({ value }) => ...)`                     |
 | **Checkbox Array**     | `[formField]="form.tags"` (string[])          | Checkboxes ONLY bind to `boolean`                           |
+| **Manual event handlers** | `(input)="onInput($event)"`                    | DO NOT add - `[formField]` auto-syncs                    |
+
+## Using Signal Forms in Facades
+
+When using signal forms in a facade (service pattern), follow these patterns:
+
+### Accessing Values in Computed Signals
+
+```ts
+// WRONG - FieldState vs FormField confusion
+const val = this.form.field;  // Just a FormField, not the value
+
+// WRONG - need FieldState to get value
+const val = this.form.field.value();  // Property 'value' doesn't exist on FormField
+
+// RIGHT - call field to get FieldState, then access value
+const val = this.form.field().value();
+```
+
+### Updating Values (Setting Values)
+
+Signal forms are model-driven. The form is just a view layer.
+
+```ts
+// WRONG - cannot set directly on form
+this.form.field.set('new value');
+this.form.field.value.set('new value');
+
+// RIGHT - update the model signal
+this._state.update((s) => ({ ...s, field: 'new value' }));
+
+// For nested updates, use spread operator
+this._state.update((s) => ({ 
+  ...s, 
+  nested: { ...s.nested, field: 'new value' } 
+}));
+```
+
+### Example: Complete Facade Pattern
+
+```ts
+interface MyFormState {
+  search: string;
+  category: string;
+  sortBy: string;
+  sortDirection: 'asc' | 'desc';
+}
+
+@Injectable()
+export class MyFacade {
+  private readonly _state = signal<MyFormState>({
+    search: '',
+    category: 'all',
+    sortBy: 'name',
+    sortDirection: 'asc',
+  });
+
+  // Form wraps the state signal
+  readonly myForm = form(this._state, (s) => {
+    required(s.search);
+    required(s.category);
+  });
+
+  // Computed signals access form values
+  readonly filteredData = computed(() => {
+    const search = this.myForm.search().value();
+    const category = this.myForm.category().value();
+    // ... filter logic
+  });
+
+  // Update via model signal, form auto-syncs
+  updateSearch(value: string): void {
+    this._state.update((s) => ({ ...s, search: value }));
+  }
+
+  // Toggle helper for sort direction
+  toggleSort(): void {
+    const current = this.myForm.sortDirection().value();
+    this._state.update((s) => ({ 
+      ...s, 
+      sortDirection: current === 'asc' ? 'desc' : 'asc' 
+    }));
+  }
+}
+```
+
+### Template Binding (No Manual Handlers)
+
+```html
+<!-- WRONG - manual handlers NOT needed -->
+<input [formField]="form.search" (input)="onSearch($event)" />
+
+<!-- RIGHT - formField auto-syncs -->
+<input [formField]="form.search" />
+
+<!-- Select works the same way -->
+<select [formField]="form.category">
+  <option value="all">All</option>
+</select>
+```
+
+The key insight: `[formField]` directive automatically:
+- Binds value from model to input
+- Listens to input events and updates model
+- Handles validation state (touched, dirty, etc.)
 
 ## Big Form Example
 
@@ -894,4 +1000,77 @@ totalPriceFormatted = computed(() => this.totalPrice().toFixed(2));
 @for (item of items; track $index; let outerIdx = $index) { @for (sub of item.subs; track $index) {
 <button (click)="remove(outerIdx, $index)">X</button>
 } }
+```
+
+### `Type 'FieldState<number, string>' is not assignable to parameter of type 'number'`
+
+**Problem**: Accessing form value incorrectly - trying to use FormField directly instead of FieldState.
+
+```ts
+// WRONG - this.factoringForm.montoInversion returns FormField
+const monto = this.factoringForm.montoInversion;
+
+// RIGHT - call to get FieldState, then .value() for actual value
+const monto = this.factoringForm.montoInversion().value();
+
+// In computed signals:
+readonly total = computed(() => {
+  return this.form.amount().value() * 2;
+});
+```
+
+### `Type 'FieldState<"asc" | "desc", string>' is not comparable to type 'string'`
+
+**Problem**: Comparing FieldState directly to string literal.
+
+```ts
+// WRONG
+if (this.form.direction() === 'asc') { ... }
+
+// RIGHT - compare the VALUE, not the FieldState
+if (this.form.direction().value() === 'asc') { ... }
+```
+
+### `Property 'set' does not exist on type 'FieldTree<..., ...>'
+
+**Problem**: Trying to set values directly on form fields. Signal forms are model-driven.
+
+```ts
+// WRONG
+this.form.field.set('value');
+this.form.field.value.set('value');
+
+// RIGHT - update the model signal
+this._state.update((s) => ({ ...s, field: 'new value' }));
+```
+
+### Using `[formField]` with value access in templates
+
+For binding values to child components or conditional checks:
+
+```html
+<!-- WRONG - accessing value directly on field -->
+<input [value]="form.field" />
+
+<!-- RIGHT - use .value() to get actual value -->
+<input [value]="form.field().value()" />
+
+<!-- For passing to child components -->
+<app-child [value]="form.field().value()" />
+
+<!-- For conditional checks -->
+@if (form.field().value() > 0) { ... }
+```
+
+### Manual event handlers are NOT needed
+
+```html
+<!-- WRONG - DON'T do this with signal forms -->
+<input [formField]="form.name" (input)="updateName($event)" />
+
+<!-- WRONG - DON'T do this either -->
+<input [formField]="form.name" (change)="onChange($event)" />
+
+<!-- RIGHT - formField auto-syncs, no handlers needed -->
+<input [formField]="form.name" />
 ```
