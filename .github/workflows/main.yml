@@ -1,0 +1,11 @@
+name: CICD
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "prod" ]
+
+jobs:
+  call-workflow:
+    uses: rosalesponcerdev/workflow_repository/.github/workflows/docker-nginx.yml@prod
+    secrets: inherit
