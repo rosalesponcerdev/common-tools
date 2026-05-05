@@ -9,6 +9,14 @@ export const TOOLS_DATA: Tool[] = [
     category: 'prestamype',
     route: '/tools/prestamype/factoring',
   },
+  {
+    id: 'smart-shopping',
+    name: 'Smart Shopping',
+    description: 'Compara precios por unidad y ahorra en el supermercado',
+    icon: '🛒',
+    category: 'ahorro',
+    route: '/tools/smart-shopping',
+  },
   // {
   //   id: 'prestamype-simulador-tea',
   //   name: 'Simulador TEA',

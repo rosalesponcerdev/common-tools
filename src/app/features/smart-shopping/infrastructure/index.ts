@@ -1,0 +1,1 @@
+export * from './product-local-storage.repository';
