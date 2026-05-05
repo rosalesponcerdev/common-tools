@@ -1,5 +1,6 @@
 export type ClientRating = 'A+' | 'A' | 'B' | 'C' | 'D';
 export type Currency = 'USD' | 'PEN';
+export type ProductType = 'factoring' | 'confirming';
 
 export interface Client {
   name: string;
@@ -14,6 +15,17 @@ export interface FactoringOpportunity {
   financing_interest_rate: number;
   payment_date: string;
   percentage_financed: number;
+  product: ProductType;
+  promotion_warranty_applied: boolean;
+}
+
+export type SortField = 'type' | 'rating' | 'promotion' | 'gananciaFactoring' | 'gananciaPlazoFijo' | 'diferencia' | 'tea' | 'dias';
+export type GroupField = 'none' | 'type' | 'rating' | 'promotion';
+
+export interface GroupedResults {
+  key: string;
+  label: string;
+  results: ComparisonResult[];
 }
 
 export interface FactoringResult {
