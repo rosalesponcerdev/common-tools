@@ -1,0 +1,63 @@
+import { Component, ChangeDetectionStrategy, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-product-create',
+  imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div class="flex justify-center py-8">
+      <div
+        class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8 text-center max-w-sm shadow-sm"
+      >
+        <span class="text-5xl block mb-4">🏷️</span>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Crear Producto</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          Agrega uno o varios productos separados por comas o saltos de línea
+        </p>
+        <div class="flex gap-2">
+          <textarea
+            [(ngModel)]="productName"
+            placeholder="Arroz, Leche&#10;Detergente, Fideos..."
+            (keydown.enter)="create(); $event.preventDefault()"
+            rows="3"
+            class="flex-1 px-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors resize-none"
+          ></textarea>
+          <button
+            class="inline-flex items-center justify-center w-11 h-11 text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-lg transition-colors dark:bg-emerald-500 dark:hover:bg-emerald-400"
+            (click)="create()"
+          >
+            <svg
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class ProductCreateComponent {
+  readonly createProducts = output<string[]>();
+
+  productName = '';
+
+  create(): void {
+    if (!this.productName.trim()) return;
+
+    const names = this.productName
+      .split(/[,\n]/)
+      .map((n) => n.trim())
+      .filter((n) => n.length > 0);
+
+    if (names.length > 0) {
+      this.createProducts.emit(names);
+      this.productName = '';
+    }
+  }
+}
