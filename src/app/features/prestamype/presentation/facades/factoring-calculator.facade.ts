@@ -71,7 +71,9 @@ function parseOpportunities(json: string): ParsedOpportunities {
       }
 
       if (!validProduct) {
-        errors.push(`Fila ${parsed.indexOf(item) + 1}: producto inválido (solo factoring o confirming)`);
+        errors.push(
+          `Fila ${parsed.indexOf(item) + 1}: producto inválido (solo factoring o confirming)`,
+        );
         continue;
       }
 

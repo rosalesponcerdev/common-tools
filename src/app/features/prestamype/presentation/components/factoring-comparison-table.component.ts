@@ -10,28 +10,44 @@ import { ComparisonResult } from '../../domain';
       <table class="w-full text-xs">
         <thead>
           <tr class="border-b border-gray-200 dark:border-slate-700">
-            <th class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Tipo
             </th>
-            <th class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Cliente
             </th>
-            <th class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Promo
             </th>
-            <th class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Días
             </th>
-            <th class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Inversión
             </th>
-            <th class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Factoring
             </th>
-            <th class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Plazo Fijo
             </th>
-            <th class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]">
+            <th
+              class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+            >
               Mejor
             </th>
           </tr>
@@ -67,7 +83,7 @@ import { ComparisonResult } from '../../domain';
                   </span>
                 </div>
                 <div class="text-[10px] text-gray-400 dark:text-gray-500">
-                  max S/ {{ getMontoMaximo(result.factoring.opportunity) | number:'1.0-0' }}
+                  max S/ {{ getMontoMaximo(result.factoring.opportunity) | number: '1.0-0' }}
                   @if (excedeMontoMaximo(result)) {
                     <span class="text-red-500 font-semibold">(⚠)</span>
                   }
@@ -89,7 +105,7 @@ import { ComparisonResult } from '../../domain';
               <!-- Inversión -->
               <td class="text-right py-2 px-3">
                 <span class="text-gray-700 dark:text-gray-300 font-medium">
-                  {{ result.factoring.montoInvertido | number:'1.0-0' }}
+                  {{ result.factoring.montoInvertido | number: '1.0-0' }}
                 </span>
               </td>
 
@@ -97,15 +113,23 @@ import { ComparisonResult } from '../../domain';
               <td class="text-right py-2 px-3">
                 <span
                   class="font-bold"
-                  [class.text-emerald-600]="result.factoring.esMasRentable && !excedeMontoMaximo(result)"
-                  [class.dark:text-emerald-400]="result.factoring.esMasRentable && !excedeMontoMaximo(result)"
-                  [class.text-gray-400]="!result.factoring.esMasRentable || excedeMontoMaximo(result)"
-                  [class.dark:text-gray-500]="!result.factoring.esMasRentable || excedeMontoMaximo(result)"
+                  [class.text-emerald-600]="
+                    result.factoring.esMasRentable && !excedeMontoMaximo(result)
+                  "
+                  [class.dark:text-emerald-400]="
+                    result.factoring.esMasRentable && !excedeMontoMaximo(result)
+                  "
+                  [class.text-gray-400]="
+                    !result.factoring.esMasRentable || excedeMontoMaximo(result)
+                  "
+                  [class.dark:text-gray-500]="
+                    !result.factoring.esMasRentable || excedeMontoMaximo(result)
+                  "
                 >
-                  {{ result.factoring.gananciaNeta | number:'1.2-2' }}
+                  {{ result.factoring.gananciaNeta | number: '1.2-2' }}
                 </span>
                 <div class="text-[10px] text-gray-400 dark:text-gray-500">
-                  {{ result.factoring.teaNetaReal * 100 | number:'1.1-1' }}% TEA
+                  {{ result.factoring.teaNetaReal * 100 | number: '1.1-1' }}% TEA
                 </div>
               </td>
 
@@ -113,15 +137,23 @@ import { ComparisonResult } from '../../domain';
               <td class="text-right py-2 px-3">
                 <span
                   class="font-bold"
-                  [class.text-emerald-600]="result.plazoFijo.esMasRentable && !excedeMontoMaximo(result)"
-                  [class.dark:text-emerald-400]="result.plazoFijo.esMasRentable && !excedeMontoMaximo(result)"
-                  [class.text-gray-400]="!result.plazoFijo.esMasRentable || excedeMontoMaximo(result)"
-                  [class.dark:text-gray-500]="!result.plazoFijo.esMasRentable || excedeMontoMaximo(result)"
+                  [class.text-emerald-600]="
+                    result.plazoFijo.esMasRentable && !excedeMontoMaximo(result)
+                  "
+                  [class.dark:text-emerald-400]="
+                    result.plazoFijo.esMasRentable && !excedeMontoMaximo(result)
+                  "
+                  [class.text-gray-400]="
+                    !result.plazoFijo.esMasRentable || excedeMontoMaximo(result)
+                  "
+                  [class.dark:text-gray-500]="
+                    !result.plazoFijo.esMasRentable || excedeMontoMaximo(result)
+                  "
                 >
-                  {{ result.plazoFijo.gananciaNeta | number:'1.2-2' }}
+                  {{ result.plazoFijo.gananciaNeta | number: '1.2-2' }}
                 </span>
                 <div class="text-[10px] text-gray-400 dark:text-gray-500">
-                  {{ result.plazoFijo.tea * 100 | number:'1.1-1' }}% TEA
+                  {{ result.plazoFijo.tea * 100 | number: '1.1-1' }}% TEA
                 </div>
               </td>
 

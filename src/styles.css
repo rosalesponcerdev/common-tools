@@ -2,35 +2,35 @@
 
 @theme {
   /* Core Colors - High Contrast */
-  --color-app-bg: #F8F9FA;
-  --color-app-surface: #FFFFFF;
+  --color-app-bg: #f8f9fa;
+  --color-app-surface: #ffffff;
   --color-app-text: #111827;
-  --color-app-text-secondary: #4B5563;
-  --color-app-muted: #6B7280;
-  --color-app-border: #E5E7EB;
+  --color-app-text-secondary: #4b5563;
+  --color-app-muted: #6b7280;
+  --color-app-border: #e5e7eb;
 
   /* Brand Colors */
   --color-app-primary: #059669;
   --color-app-primary-hover: #047857;
-  --color-app-primary-light: #D1FAE5;
+  --color-app-primary-light: #d1fae5;
 
   /* Accent Colors */
   --color-app-success: #059669;
-  --color-app-success-light: #D1FAE5;
-  --color-app-warning: #D97706;
-  --color-app-warning-light: #FEF3C7;
-  --color-app-error: #DC2626;
-  --color-app-error-light: #FEE2E2;
+  --color-app-success-light: #d1fae5;
+  --color-app-warning: #d97706;
+  --color-app-warning-light: #fef3c7;
+  --color-app-error: #dc2626;
+  --color-app-error-light: #fee2e2;
 
   /* Dark Mode */
-  --color-app-dark-bg: #0F172A;
-  --color-app-dark-surface: #1E293B;
-  --color-app-dark-text: #F1F5F9;
-  --color-app-dark-text-secondary: #CBD5E1;
-  --color-app-dark-muted: #94A3B8;
+  --color-app-dark-bg: #0f172a;
+  --color-app-dark-surface: #1e293b;
+  --color-app-dark-text: #f1f5f9;
+  --color-app-dark-text-secondary: #cbd5e1;
+  --color-app-dark-muted: #94a3b8;
   --color-app-dark-border: #334155;
-  --color-app-dark-primary: #34D399;
-  --color-app-dark-primary-hover: #6EE7B7;
+  --color-app-dark-primary: #34d399;
+  --color-app-dark-primary-hover: #6ee7b7;
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

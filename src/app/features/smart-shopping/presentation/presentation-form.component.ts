@@ -1,10 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  output,
-  viewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, output, viewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UnitOfMeasure } from '../domain';
 
@@ -21,9 +15,7 @@ export interface PresentationFormOutput {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4 mb-5">
-      <div
-        class="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900 dark:text-white"
-      >
+      <div class="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900 dark:text-white">
         <span
           class="w-6 h-6 flex items-center justify-center bg-emerald-600 text-white rounded-full text-xs font-bold"
           >+</span
@@ -32,8 +24,7 @@ export interface PresentationFormOutput {
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div class="col-span-2 sm:col-span-1">
-          <label
-            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+          <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
             >Marca</label
           >
           <input
@@ -45,8 +36,7 @@ export interface PresentationFormOutput {
           />
         </div>
         <div>
-          <label
-            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+          <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
             >Cantidad</label
           >
           <input
@@ -59,8 +49,7 @@ export interface PresentationFormOutput {
           />
         </div>
         <div>
-          <label
-            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+          <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
             >Unidad</label
           >
           <select
@@ -75,8 +64,7 @@ export interface PresentationFormOutput {
           </select>
         </div>
         <div>
-          <label
-            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+          <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
             >Precio</label
           >
           <div class="relative">

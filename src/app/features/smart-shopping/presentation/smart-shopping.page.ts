@@ -1,9 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SmartShoppingFacade } from './smart-shopping.facade';
 import { ProductCreateComponent } from './product-create.component';
@@ -124,13 +119,18 @@ export class SmartShoppingPageComponent implements OnInit {
     this.facade.createProducts(names);
   }
 
-createQuickProduct(name: string): void {
+  createQuickProduct(name: string): void {
     if (name.trim()) {
       this.facade.createProduct({ name });
     }
   }
 
-  onAddPresentation(data: { brand: string; quantity: number; unit: UnitOfMeasure; price: number }): void {
+  onAddPresentation(data: {
+    brand: string;
+    quantity: number;
+    unit: UnitOfMeasure;
+    price: number;
+  }): void {
     const productId = this.facade.selectedProductId();
     if (productId) {
       this.facade.addPresentation({

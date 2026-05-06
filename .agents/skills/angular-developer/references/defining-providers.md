@@ -11,7 +11,7 @@ The most common way to provide a service is using `providedIn: 'root'` on an `@I
 Use `InjectionToken` for non-class dependencies (configuration objects, functions, primitives). An `InjectionToken` can also be automatically provided.
 
 ```ts
-import {InjectionToken} from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export interface AppConfig {
   apiUrl: string;
@@ -19,7 +19,7 @@ export interface AppConfig {
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config', {
   providedIn: 'root',
-  factory: () => ({apiUrl: 'https://api.example.com'}),
+  factory: () => ({ apiUrl: 'https://api.example.com' }),
 });
 ```
 
@@ -34,10 +34,10 @@ You use the `providers` array when a service lacks `providedIn`, when you want a
     LocalService,
 
     // useClass: Swap implementations
-    {provide: Logger, useClass: BetterLogger},
+    { provide: Logger, useClass: BetterLogger },
 
     // useValue: Provide static values
-    {provide: API_URL_TOKEN, useValue: 'https://api.example.com'},
+    { provide: API_URL_TOKEN, useValue: 'https://api.example.com' },
 
     // useFactory: Generate value dynamically
     {
@@ -46,10 +46,10 @@ You use the `providers` array when a service lacks `providedIn`, when you want a
     },
 
     // useExisting: Create an alias
-    {provide: OldLogger, useExisting: NewLogger},
+    { provide: OldLogger, useExisting: NewLogger },
 
     // multi: Provide multiple values for the same token as an array
-    {provide: INTERCEPTOR_TOKEN, useClass: AuthInterceptor, multi: true},
+    { provide: INTERCEPTOR_TOKEN, useClass: AuthInterceptor, multi: true },
   ],
 })
 export class Example {}
@@ -67,7 +67,7 @@ Library authors should export functions that return provider arrays to encapsula
 
 ```ts
 export function provideAnalytics(config: AnalyticsConfig): Provider[] {
-  return [{provide: ANALYTICS_CONFIG, useValue: config}, AnalyticsService];
+  return [{ provide: ANALYTICS_CONFIG, useValue: config }, AnalyticsService];
 }
 ```
 
@@ -108,7 +108,8 @@ export const TOOLS_ROUTES: Routes = [
   {
     path: '',
     providers: provideTools(),
-    loadComponent: () => import('./presentation/pages/tools-dashboard.page').then(m => m.ToolsDashboardPage),
+    loadComponent: () =>
+      import('./presentation/pages/tools-dashboard.page').then((m) => m.ToolsDashboardPage),
   },
 ];
 ```
@@ -119,4 +120,7 @@ export const TOOLS_ROUTES: Routes = [
 - **Scoped**: Providers only available when feature is loaded (lazy loading)
 - **Replaceable**: Easy to swap implementations (e.g., `ToolInMemoryRepository` → `ToolHttpRepository`)
 - **Testable**: Mock providers can be provided in tests by overriding
+
+```
+
 ```
