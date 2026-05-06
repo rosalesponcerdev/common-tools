@@ -88,12 +88,10 @@ import { UnitOfMeasure } from '../domain';
           @if (facade.selectedProduct()) {
             <app-product-card
               [product]="facade.selectedProduct()!"
-              [brandFilter]="facade.brandFilter()"
               (addPresentation)="onAddPresentation($event)"
               (deleteProduct)="deleteProduct()"
               (deletePresentation)="deletePresentation($event)"
               (createQuickProduct)="createQuickProduct($event)"
-              (setBrandFilter)="onBrandFilterChange($event)"
             />
           } @else {
             <app-product-create (createProducts)="onCreateProducts($event)" />
@@ -157,9 +155,5 @@ createQuickProduct(name: string): void {
     if (productId && confirm('¿Eliminar este producto y todas sus presentaciones?')) {
       this.facade.deleteProduct({ productId });
     }
-  }
-
-  onBrandFilterChange(filter: string): void {
-    this.facade.setBrandFilter(filter);
   }
 }
