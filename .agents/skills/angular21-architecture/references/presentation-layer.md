@@ -92,7 +92,6 @@ import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/cor
 
 @Component({
   selector: 'app-orders-list-page',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [OrderCardComponent, LoadingSpinnerComponent, ErrorBannerComponent],
   template: `
@@ -148,7 +147,6 @@ import { Component, input, output, ChangeDetectionStrategy } from '@angular/core
 
 @Component({
   selector: 'app-order-card',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <article class="order-card" [class.selected]="selected()" (click)="select.emit()">
@@ -223,7 +221,6 @@ export const ORDERS_ROUTES: Routes = [
 ## Checklist Presentation Layer
 
 - [ ] `ChangeDetectionStrategy.OnPush` en TODOS los componentes
-- [ ] `standalone: true` en todos los componentes
 - [ ] `input()` / `output()` en lugar de `@Input()` / `@Output()`
 - [ ] Control flow `@if`, `@for` con `track`, `@switch`
 - [ ] Pages solo inyectan Facade, nunca use cases directamente

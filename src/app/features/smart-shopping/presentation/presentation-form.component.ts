@@ -1,0 +1,145 @@
+import {
+  Component,
+  ChangeDetectionStrategy,
+  output,
+  viewChild,
+  ElementRef,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UnitOfMeasure } from '../domain';
+
+export interface PresentationFormOutput {
+  brand: string;
+  quantity: number;
+  unit: UnitOfMeasure;
+  price: number;
+}
+
+@Component({
+  selector: 'app-presentation-form',
+  imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div class="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4 mb-5">
+      <div
+        class="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900 dark:text-white"
+      >
+        <span
+          class="w-6 h-6 flex items-center justify-center bg-emerald-600 text-white rounded-full text-xs font-bold"
+          >+</span
+        >
+        Nueva Presentación
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="col-span-2 sm:col-span-1">
+          <label
+            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+            >Marca</label
+          >
+          <input
+            #brandInput
+            type="text"
+            [(ngModel)]="brand"
+            placeholder="Costeño, Metro..."
+            class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+            >Cantidad</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="quantity"
+            placeholder="750"
+            min="0"
+            step="0.01"
+            class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+            >Unidad</label
+          >
+          <select
+            [(ngModel)]="unit"
+            class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors cursor-pointer"
+          >
+            <option value="gr">g</option>
+            <option value="kg">kg</option>
+            <option value="ml">ml</option>
+            <option value="lt">L</option>
+            <option value="unid">und</option>
+          </select>
+        </div>
+        <div>
+          <label
+            class="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5"
+            >Precio</label
+          >
+          <div class="relative">
+            <span
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-400 dark:text-gray-500"
+              >S/</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="price"
+              placeholder="3.50"
+              min="0"
+              step="0.01"
+              (keyup.enter)="submit()"
+              class="w-full pl-7 pr-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        class="mt-3 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-lg transition-colors dark:bg-emerald-500 dark:hover:bg-emerald-400"
+        (click)="submit()"
+      >
+        Agregar
+      </button>
+    </div>
+  `,
+})
+export class PresentationFormComponent {
+  readonly add = output<PresentationFormOutput>();
+
+  readonly brandInput = viewChild.required<ElementRef<HTMLInputElement>>('brandInput');
+
+  brand = '';
+  quantity: number | null = null;
+  unit: UnitOfMeasure = 'gr';
+  price: number | null = null;
+
+  submit(): void {
+    if (
+      !this.brand.trim() ||
+      !this.quantity ||
+      this.quantity <= 0 ||
+      !this.price ||
+      this.price <= 0
+    ) {
+      return;
+    }
+
+    this.add.emit({
+      brand: this.brand,
+      quantity: this.quantity,
+      unit: this.unit,
+      price: this.price,
+    });
+
+    this.brand = '';
+    this.quantity = null;
+    this.unit = 'gr';
+    this.price = null;
+
+    setTimeout(() => {
+      this.brandInput().nativeElement.focus();
+    }, 0);
+  }
+}
