@@ -141,7 +141,8 @@ export const TOOLS_ROUTES: Routes = [
   {
     path: '',
     providers: provideTools(),
-    loadComponent: () => import('./presentation/pages/tools-dashboard.page').then(m => m.ToolsDashboardPage),
+    loadComponent: () =>
+      import('./presentation/pages/tools-dashboard.page').then((m) => m.ToolsDashboardPage),
   },
 ];
 ```

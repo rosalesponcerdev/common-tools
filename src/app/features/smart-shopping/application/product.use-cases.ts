@@ -1,5 +1,14 @@
 import { inject } from '@angular/core';
-import { ProductRepository, Product, createProduct, createPresentation, addPresentationToProduct, updatePresentationInProduct, removePresentationFromProduct, UnitOfMeasure } from '../domain';
+import {
+  ProductRepository,
+  Product,
+  createProduct,
+  createPresentation,
+  addPresentationToProduct,
+  updatePresentationInProduct,
+  removePresentationFromProduct,
+  UnitOfMeasure,
+} from '../domain';
 
 export class GetProductsUseCase {
   private readonly repository = inject(ProductRepository);
@@ -62,7 +71,12 @@ export class UpdatePresentationUseCase {
     const product = await this.repository.getById(input.productId);
     if (!product) return null;
 
-    const updates: Partial<{ brand: string; quantity: number; unit: UnitOfMeasure; price: number }> = {};
+    const updates: Partial<{
+      brand: string;
+      quantity: number;
+      unit: UnitOfMeasure;
+      price: number;
+    }> = {};
     if (input.brand !== undefined) updates.brand = input.brand;
     if (input.quantity !== undefined) updates.quantity = input.quantity;
     if (input.unit !== undefined) updates.unit = input.unit;

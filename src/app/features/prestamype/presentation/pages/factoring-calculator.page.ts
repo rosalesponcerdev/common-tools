@@ -24,8 +24,12 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
           <!-- Left Column - Form -->
           <div class="lg:col-span-1 space-y-6">
             <!-- Input Card -->
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-              <h2 class="font-semibold text-lg text-gray-900 dark:text-white mb-4">Datos de Entrada</h2>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm"
+            >
+              <h2 class="font-semibold text-lg text-gray-900 dark:text-white mb-4">
+                Datos de Entrada
+              </h2>
 
               <div class="space-y-4">
                 <!-- JSON Input -->
@@ -45,7 +49,8 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                   }
                   @if (facade.filteredInfo() && facade.filteredInfo()!.count > 0) {
                     <p class="mt-2 text-xs text-amber-600 dark:text-amber-400">
-                      ⚠️ {{ facade.filteredInfo()!.count }} facturas en {{ facade.filteredInfo()!.currency }} fueron filtradas
+                      ⚠️ {{ facade.filteredInfo()!.count }} facturas en
+                      {{ facade.filteredInfo()!.currency }} fueron filtradas
                     </p>
                   }
                 </div>
@@ -64,7 +69,9 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                   <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                     Este monto se simulará en cada factura PEN individualmente
                   </p>
-                  @if (!facade.isMontoValido() && facade.factoringForm.montoInversion().value() > 0) {
+                  @if (
+                    !facade.isMontoValido() && facade.factoringForm.montoInversion().value() > 0
+                  ) {
                     <p class="mt-1 text-xs text-red-600 dark:text-red-400">
                       El monto excede el máximo de alguna factura
                     </p>
@@ -89,7 +96,9 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
 
             <!-- Summary Card -->
             @if (facade.comparacionResultados().length > 0) {
-              <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm"
+              >
                 <h2 class="font-semibold text-lg text-gray-900 dark:text-white mb-4">Resumen</h2>
                 <div class="space-y-3">
                   <div class="flex justify-between">
@@ -120,7 +129,8 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                         [class.text-red-600]="getDiferencia() < 0"
                         [class.dark:text-red-400]="getDiferencia() < 0"
                       >
-                        {{ getDiferencia() > 0 ? '+' : '' }}S/ {{ getDiferencia() | number: '1.2-2' }}
+                        {{ getDiferencia() > 0 ? '+' : '' }}S/
+                        {{ getDiferencia() | number: '1.2-2' }}
                       </span>
                     </div>
                   </div>
@@ -132,12 +142,18 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
           <!-- Right Column - Results -->
           <div class="lg:col-span-2">
             @if (facade.comparacionResultados().length > 0) {
-              <div class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm"
+              >
                 <!-- Toolbar -->
-                <div class="p-3 border-b border-gray-200 dark:border-slate-700 flex flex-wrap items-center gap-3">
+                <div
+                  class="p-3 border-b border-gray-200 dark:border-slate-700 flex flex-wrap items-center gap-3"
+                >
                   <!-- Sort -->
                   <div class="flex items-center gap-2">
-                    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400">Ordenar:</label>
+                    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400"
+                      >Ordenar:</label
+                    >
                     <select
                       [formField]="facade.factoringForm.sortField"
                       class="text-xs px-2.5 py-1.5 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-medium"
@@ -154,7 +170,11 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                     <button
                       (click)="toggleSortDirection()"
                       class="text-xs px-2.5 py-1.5 bg-gray-100 dark:bg-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors font-medium"
-                      [title]="facade.factoringForm.sortDirection().value() === 'asc' ? 'Ascendente' : 'Descendente'"
+                      [title]="
+                        facade.factoringForm.sortDirection().value() === 'asc'
+                          ? 'Ascendente'
+                          : 'Descendente'
+                      "
                     >
                       {{ facade.factoringForm.sortDirection().value() === 'asc' ? '↑' : '↓' }}
                     </button>
@@ -162,7 +182,9 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
 
                   <!-- Group -->
                   <div class="flex items-center gap-2">
-                    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400">Agrupar:</label>
+                    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400"
+                      >Agrupar:</label
+                    >
                     <select
                       [formField]="facade.factoringForm.groupField"
                       class="text-xs px-2.5 py-1.5 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-medium"
@@ -182,8 +204,12 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                 <!-- Groups -->
                 @for (group of facade.groupedResults(); track group.key) {
                   @if (facade.factoringForm.groupField().value() !== 'none') {
-                    <div class="px-4 py-2.5 bg-gray-50 dark:bg-slate-900/50 border-b border-gray-200 dark:border-slate-700">
-                      <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                    <div
+                      class="px-4 py-2.5 bg-gray-50 dark:bg-slate-900/50 border-b border-gray-200 dark:border-slate-700"
+                    >
+                      <span
+                        class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide"
+                      >
                         {{ group.label }}
                       </span>
                     </div>
@@ -196,13 +222,16 @@ import { FactoringComparisonTableComponent } from '../components/factoring-compa
                 }
               </div>
             } @else {
-              <div class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-10 sm:p-12 text-center shadow-sm">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-10 sm:p-12 text-center shadow-sm"
+              >
                 <span class="text-5xl block mb-4">📊</span>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   Sin datos para comparar
                 </h3>
                 <p class="mt-2 text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
-                  Ingresa las facturas en formato JSON y el monto de inversión para ver la comparación
+                  Ingresa las facturas en formato JSON y el monto de inversión para ver la
+                  comparación
                 </p>
               </div>
             }
@@ -221,11 +250,15 @@ export class FactoringCalculatorPage {
   }
 
   getTotalFactoring(): number {
-    return this.facade.comparacionResultados().reduce((sum, r) => sum + r.factoring.gananciaNeta, 0);
+    return this.facade
+      .comparacionResultados()
+      .reduce((sum, r) => sum + r.factoring.gananciaNeta, 0);
   }
 
   getTotalPlazoFijo(): number {
-    return this.facade.comparacionResultados().reduce((sum, r) => sum + r.plazoFijo.gananciaNeta, 0);
+    return this.facade
+      .comparacionResultados()
+      .reduce((sum, r) => sum + r.plazoFijo.gananciaNeta, 0);
   }
 
   getDiferencia(): number {

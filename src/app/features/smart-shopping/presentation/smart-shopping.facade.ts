@@ -1,6 +1,25 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Product, Presentation, sortPresentationsByUnitPrice, findCheapestPresentation, filterPresentationsByBrand, UnitOfMeasure } from '../domain';
-import { GetProductsUseCase, CreateProductUseCase, AddPresentationUseCase, UpdatePresentationUseCase, DeleteProductUseCase, DeletePresentationUseCase, CreateProductInput, AddPresentationInput, UpdatePresentationInput, DeleteProductInput, DeletePresentationInput } from '../application';
+import {
+  Product,
+  Presentation,
+  sortPresentationsByUnitPrice,
+  findCheapestPresentation,
+  filterPresentationsByBrand,
+  UnitOfMeasure,
+} from '../domain';
+import {
+  GetProductsUseCase,
+  CreateProductUseCase,
+  AddPresentationUseCase,
+  UpdatePresentationUseCase,
+  DeleteProductUseCase,
+  DeletePresentationUseCase,
+  CreateProductInput,
+  AddPresentationInput,
+  UpdatePresentationInput,
+  DeleteProductInput,
+  DeletePresentationInput,
+} from '../application';
 
 export interface ProductWithSortedPresentations extends Product {
   sortedPresentations: Presentation[];
@@ -52,7 +71,7 @@ export class SmartShoppingFacade {
     private readonly addPresentationUseCase: AddPresentationUseCase,
     private readonly updatePresentationUseCase: UpdatePresentationUseCase,
     private readonly deleteProductUseCase: DeleteProductUseCase,
-    private readonly deletePresentationUseCase: DeletePresentationUseCase
+    private readonly deletePresentationUseCase: DeletePresentationUseCase,
   ) {}
 
   async loadProducts(): Promise<void> {
@@ -103,9 +122,7 @@ export class SmartShoppingFacade {
     try {
       const updated = await this.addPresentationUseCase.execute(input);
       if (updated) {
-        this.products.update((current) =>
-          current.map((p) => (p.id === updated.id ? updated : p))
-        );
+        this.products.update((current) => current.map((p) => (p.id === updated.id ? updated : p)));
       }
     } catch (e) {
       this.error.set('Error al agregar presentación');
@@ -117,9 +134,7 @@ export class SmartShoppingFacade {
     try {
       const updated = await this.updatePresentationUseCase.execute(input);
       if (updated) {
-        this.products.update((current) =>
-          current.map((p) => (p.id === updated.id ? updated : p))
-        );
+        this.products.update((current) => current.map((p) => (p.id === updated.id ? updated : p)));
       }
     } catch (e) {
       this.error.set('Error al actualizar presentación');
@@ -147,9 +162,7 @@ export class SmartShoppingFacade {
     try {
       const updated = await this.deletePresentationUseCase.execute(input);
       if (updated) {
-        this.products.update((current) =>
-          current.map((p) => (p.id === updated.id ? updated : p))
-        );
+        this.products.update((current) => current.map((p) => (p.id === updated.id ? updated : p)));
       }
     } catch (e) {
       this.error.set('Error al eliminar presentación');

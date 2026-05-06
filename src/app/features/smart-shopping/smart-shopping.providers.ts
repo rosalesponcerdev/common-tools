@@ -1,6 +1,13 @@
 import { Provider } from '@angular/core';
 import { ProductLocalStorageRepository } from './infrastructure';
-import { GetProductsUseCase, CreateProductUseCase, AddPresentationUseCase, UpdatePresentationUseCase, DeleteProductUseCase, DeletePresentationUseCase } from './application';
+import {
+  GetProductsUseCase,
+  CreateProductUseCase,
+  AddPresentationUseCase,
+  UpdatePresentationUseCase,
+  DeleteProductUseCase,
+  DeletePresentationUseCase,
+} from './application';
 import { SmartShoppingFacade } from './presentation';
 import { ProductRepository } from './domain';
 

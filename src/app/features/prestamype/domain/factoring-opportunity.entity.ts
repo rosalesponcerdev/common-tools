@@ -19,7 +19,15 @@ export interface FactoringOpportunity {
   promotion_warranty_applied: boolean;
 }
 
-export type SortField = 'type' | 'rating' | 'promotion' | 'gananciaFactoring' | 'gananciaPlazoFijo' | 'diferencia' | 'tea' | 'dias';
+export type SortField =
+  | 'type'
+  | 'rating'
+  | 'promotion'
+  | 'gananciaFactoring'
+  | 'gananciaPlazoFijo'
+  | 'diferencia'
+  | 'tea'
+  | 'dias';
 export type GroupField = 'none' | 'type' | 'rating' | 'promotion';
 
 export interface GroupedResults {

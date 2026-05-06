@@ -36,7 +36,7 @@ export const createPresentation = (
   brand: string,
   quantity: number,
   unit: UnitOfMeasure,
-  price: number
+  price: number,
 ): Presentation => {
   return {
     id: generateId(),
@@ -48,7 +48,11 @@ export const createPresentation = (
   };
 };
 
-export const calculateUnitPrice = (quantity: number, unit: UnitOfMeasure, price: number): number => {
+export const calculateUnitPrice = (
+  quantity: number,
+  unit: UnitOfMeasure,
+  price: number,
+): number => {
   if (quantity <= 0 || price <= 0) return 0;
 
   if (unit === 'kg' || unit === 'lt' || unit === 'unid') {
@@ -90,7 +94,7 @@ export const addPresentationToProduct = (product: Product, presentation: Present
 export const updatePresentationInProduct = (
   product: Product,
   presentationId: string,
-  updates: Partial<Omit<Presentation, 'id' | 'unitPrice'>>
+  updates: Partial<Omit<Presentation, 'id' | 'unitPrice'>>,
 ): Product => {
   return {
     ...product,
@@ -106,7 +110,10 @@ export const updatePresentationInProduct = (
   };
 };
 
-export const removePresentationFromProduct = (product: Product, presentationId: string): Product => {
+export const removePresentationFromProduct = (
+  product: Product,
+  presentationId: string,
+): Product => {
   return {
     ...product,
     presentations: product.presentations.filter((p) => p.id !== presentationId),
@@ -123,7 +130,10 @@ export const findCheapestPresentation = (presentations: Presentation[]): Present
   return sortPresentationsByUnitPrice(presentations)[0];
 };
 
-export const filterPresentationsByBrand = (presentations: Presentation[], brandQuery: string): Presentation[] => {
+export const filterPresentationsByBrand = (
+  presentations: Presentation[],
+  brandQuery: string,
+): Presentation[] => {
   if (!brandQuery.trim()) return presentations;
   const query = brandQuery.toLowerCase().trim();
   return presentations.filter((p) => p.brand.toLowerCase().includes(query));

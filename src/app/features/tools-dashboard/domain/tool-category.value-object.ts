@@ -1,4 +1,10 @@
-export type ToolCategory = 'finanzas' | 'calculadoras' | 'conversores' | 'utilidades' | 'prestamype' | 'ahorro';
+export type ToolCategory =
+  | 'finanzas'
+  | 'calculadoras'
+  | 'conversores'
+  | 'utilidades'
+  | 'prestamype'
+  | 'ahorro';
 
 export const TOOL_CATEGORIES: { value: ToolCategory | 'todas'; label: string }[] = [
   { value: 'todas', label: 'Todas' },
