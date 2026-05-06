@@ -82,6 +82,22 @@ export class SmartShoppingFacade {
     }
   }
 
+  async createProducts(names: string[]): Promise<void> {
+    if (names.length === 0) return;
+    this.error.set(null);
+    try {
+      const newProducts: Product[] = [];
+      for (const name of names) {
+        const product = await this.createProductUseCase.execute({ name });
+        newProducts.push(product);
+      }
+      this.products.update((current) => [...current, ...newProducts]);
+      this.selectedProductId.set(newProducts[0].id);
+    } catch (e) {
+      this.error.set('Error al crear productos');
+    }
+  }
+
   async addPresentation(input: AddPresentationInput): Promise<void> {
     this.error.set(null);
     try {
