@@ -20,13 +20,14 @@ interface ProductCreateForm {
           Agrega uno o varios productos separados por comas o saltos de línea
         </p>
         <form (submit)="onSubmit(); $event.preventDefault()">
-          <div class="flex gap-2">
+          <div class="flex items-center gap-2">
             <textarea
               [formField]="productForm.productName"
               placeholder="Arroz, Leche&#10;Detergente, Fideos..."
               rows="3"
               class="flex-1 px-3.5 py-2.5 text-sm bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors resize-none"
             ></textarea>
+
             <button
               type="submit"
               class="inline-flex items-center justify-center w-11 h-11 text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-lg transition-colors dark:bg-emerald-500 dark:hover:bg-emerald-400"
