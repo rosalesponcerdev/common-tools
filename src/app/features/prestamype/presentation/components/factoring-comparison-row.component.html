@@ -5,11 +5,8 @@
 >
   <!-- Tipo -->
   <td class="py-2 px-2">
-    <span
-      class="text-[10px] px-1.5 py-0.5 rounded font-semibold"
-      [class]="productClass()"
-    >
-      {{ result().factoring.opportunity.product === 'factoring' ? 'F' : 'C' }}
+    <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold" [class]="productClass()">
+      {{ product() === 'factoring' ? 'F' : 'C' }}
     </span>
   </td>
 
@@ -19,22 +16,22 @@
       <div class="flex flex-col gap-1">
         <span
           class="font-medium text-gray-900 dark:text-white truncate max-w-[160px]"
-          [title]="result().factoring.opportunity.client.tradeName"
+          [title]="clientTradeName()"
         >
-          {{ result().factoring.opportunity.client.tradeName }}
+          {{ clientTradeName() }}
         </span>
         <span
           class="font-light text-[10px] text-gray-500 dark:text-white truncate max-w-[160px]"
-          [title]="result().factoring.opportunity.client.name"
+          [title]="clientName()"
         >
-          {{ result().factoring.opportunity.client.name }}
+          {{ clientName() }}
         </span>
       </div>
       <span
         class="text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
         [class]="ratingClass()"
       >
-        {{ result().factoring.opportunity.client.rating }}
+        {{ clientRating() }}
       </span>
     </div>
     <div class="text-[10px] text-gray-400 dark:text-gray-500">
@@ -47,20 +44,20 @@
 
   <!-- Promo -->
   <td class="py-2 px-2 text-center">
-    @if (result().factoring.opportunity.promotion_warranty_applied) {
+    @if (promotionWarrantyApplied()) {
       <span class="text-sm" title="Con garantía">🛡️</span>
     }
   </td>
 
   <!-- Días -->
   <td class="text-right py-2 px-3 text-gray-500 dark:text-gray-400 font-medium">
-    {{ result().factoring.diasRestantes }}
+    {{ factoringDiasRestantes() }}
   </td>
 
   <!-- Inversión -->
   <td class="text-right py-2 px-3">
     <span class="text-gray-700 dark:text-gray-300 font-medium">
-      {{ result().factoring.montoInvertido | number: '1.0-0' }}
+      {{ factoringMontoInvertido() | number: '1.0-0' }}
     </span>
   </td>
 
@@ -73,10 +70,10 @@
       [class.text-gray-400]="!factoringWinner()"
       [class.dark:text-gray-500]="!factoringWinner()"
     >
-      {{ result().factoring.gananciaNeta | number: '1.2-2' }}
+      {{ factoringGananciaNeta() | number: '1.2-2' }}
     </span>
     <div class="text-[10px] text-gray-400 dark:text-gray-500">
-      {{ result().factoring.teaNetaReal * 100 | number: '1.1-1' }}% TEA
+      {{ factoringTeaNetaReal() * 100 | number: '1.1-1' }}% TEA
     </div>
   </td>
 
@@ -89,10 +86,10 @@
       [class.text-gray-400]="!plazoFijoWinner()"
       [class.dark:text-gray-500]="!plazoFijoWinner()"
     >
-      {{ result().plazoFijo.gananciaNeta | number: '1.2-2' }}
+      {{ plazoFijoGananciaNeta() | number: '1.2-2' }}
     </span>
     <div class="text-[10px] text-gray-400 dark:text-gray-500">
-      {{ result().plazoFijo.tea * 100 | number: '1.1-1' }}% TEA
+      {{ plazoFijoTea() * 100 | number: '1.1-1' }}% TEA
     </div>
   </td>
 
@@ -100,7 +97,7 @@
   <td class="text-center py-2 px-3">
     @if (excedeMonto()) {
       <span class="text-xs font-bold text-red-600 dark:text-red-400">⚠️</span>
-    } @else if (result().winner === 'factoring') {
+    } @else if (winner() === 'factoring') {
       <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">📄</span>
     } @else {
       <span class="text-xs font-bold text-amber-600 dark:text-amber-400">🏦</span>

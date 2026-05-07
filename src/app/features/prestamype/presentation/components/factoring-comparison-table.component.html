@@ -47,7 +47,22 @@
     <tbody>
       @for (result of resultados(); track result.factoring.opportunity._id) {
         <app-factoring-comparison-row
-          [result]="result"
+          [product]="result.factoring.opportunity.product"
+          [promotionWarrantyApplied]="result.factoring.opportunity.promotion_warranty_applied"
+          [clientTradeName]="result.factoring.opportunity.client.tradeName"
+          [clientName]="result.factoring.opportunity.client.name"
+          [clientRating]="result.factoring.opportunity.client.rating"
+          [targetAmount]="result.factoring.opportunity.target_amount"
+          [percentageFinanced]="result.factoring.opportunity.percentage_financed"
+          [factoringDiasRestantes]="result.factoring.diasRestantes"
+          [factoringMontoInvertido]="result.factoring.montoInvertido"
+          [factoringGananciaNeta]="result.factoring.gananciaNeta"
+          [factoringTeaNetaReal]="result.factoring.teaNetaReal"
+          [factoringEsMasRentable]="result.factoring.esMasRentable"
+          [plazoFijoGananciaNeta]="result.plazoFijo.gananciaNeta"
+          [plazoFijoTea]="result.plazoFijo.tea"
+          [plazoFijoEsMasRentable]="result.plazoFijo.esMasRentable"
+          [winner]="result.winner"
           [montoInversion]="montoInversion()"
         />
       }
