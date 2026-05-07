@@ -5,38 +5,7 @@ import { Tool } from '../../domain';
 @Component({
   selector: 'app-tool-card',
   imports: [RouterLink],
-  template: `
-    <a
-      [routerLink]="tool().route"
-      class="group flex flex-col h-full p-5 sm:p-6 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-slate-900/50 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
-    >
-      <div class="flex items-start gap-4">
-        <span class="text-3xl sm:text-4xl">{{ tool().icon }}</span>
-        <div class="flex-1 min-w-0">
-          <h3
-            class="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors"
-          >
-            {{ tool().name }}
-          </h3>
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
-            {{ tool().description }}
-          </p>
-        </div>
-      </div>
-      <div class="mt-auto pt-4 flex items-center justify-between">
-        <span
-          class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 capitalize"
-        >
-          {{ tool().category }}
-        </span>
-        <span
-          class="text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform text-lg"
-        >
-          →
-        </span>
-      </div>
-    </a>
-  `,
+  templateUrl: './tool-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolCardComponent {
