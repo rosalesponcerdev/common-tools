@@ -17,6 +17,14 @@ export const TOOLS_DATA: Tool[] = [
     category: 'ahorro',
     route: '/tools/smart-shopping',
   },
+  {
+    id: 'property-register',
+    name: 'Registro de Propiedades',
+    description: 'Registra y compara propiedades inmobiliarias',
+    icon: '🏠',
+    category: 'inmuebles',
+    route: '/tools/property-register',
+  },
   // {
   //   id: 'prestamype-simulador-tea',
   //   name: 'Simulador TEA',

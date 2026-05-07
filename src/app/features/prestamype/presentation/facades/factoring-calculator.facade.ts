@@ -80,6 +80,7 @@ function parseOpportunities(json: string): ParsedOpportunities {
       validOpportunities.push({
         _id: item._id,
         client: {
+          tradeName: item.client.trade_name,
           name: item.client.name,
           rating: item.client.rating,
         },
