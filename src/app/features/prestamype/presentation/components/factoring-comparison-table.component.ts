@@ -72,9 +72,20 @@ import { ComparisonResult } from '../../domain';
               <!-- Cliente -->
               <td class="py-2 px-2">
                 <div class="flex items-center gap-1.5">
-                  <span class="font-medium text-gray-900 dark:text-white truncate max-w-[160px]">
-                    {{ result.factoring.opportunity.client.name }}
-                  </span>
+                  <div class="flex flex-col gap-1">
+                    <span
+                      class="font-medium text-gray-900 dark:text-white truncate max-w-[160px]"
+                      [title]="result.factoring.opportunity.client.tradeName"
+                    >
+                      {{ result.factoring.opportunity.client.tradeName }}
+                    </span>
+                    <span
+                      class="font-light text-[10px] text-gray-500 dark:text-white truncate max-w-[160px]"
+                      [title]="result.factoring.opportunity.client.name"
+                    >
+                      {{ result.factoring.opportunity.client.name }}
+                    </span>
+                  </div>
                   <span
                     class="text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
                     [class]="getRatingClass(result.factoring.opportunity.client.rating)"

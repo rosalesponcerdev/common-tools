@@ -4,6 +4,7 @@ export type ProductType = 'factoring' | 'confirming';
 
 export interface Client {
   name: string;
+  tradeName: string;
   rating: ClientRating;
 }
 
