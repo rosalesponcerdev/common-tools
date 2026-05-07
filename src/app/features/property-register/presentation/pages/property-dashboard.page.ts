@@ -1,5 +1,6 @@
 import { Component, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PropertyRegisterFacade } from '../property-register.facade';
 import {
   PropertyFilterComponent,
@@ -12,6 +13,7 @@ import {
   selector: 'app-property-dashboard',
   imports: [
     CommonModule,
+    RouterLink,
     PropertyFilterComponent,
     PropertyFormComponent,
     PropertyListComponent,

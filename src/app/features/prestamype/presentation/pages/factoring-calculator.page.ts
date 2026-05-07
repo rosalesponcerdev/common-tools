@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FactoringCalculatorFacade } from '../facades/factoring-calculator.facade';
 import { FactoringComparisonTableComponent } from '../components/factoring-comparison-table.component';
 
 @Component({
   selector: 'app-factoring-calculator-page',
-  imports: [FormField, FactoringComparisonTableComponent, DecimalPipe],
+  imports: [FormField, FactoringComparisonTableComponent, DecimalPipe, RouterLink],
   templateUrl: './factoring-calculator.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

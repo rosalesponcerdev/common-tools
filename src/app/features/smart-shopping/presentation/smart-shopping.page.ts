@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { SmartShoppingFacade } from './smart-shopping.facade';
 import { ProductCreateComponent } from './product-create.component';
 import { ProductCardComponent } from './product-card.component';
@@ -7,7 +8,7 @@ import { UnitOfMeasure } from '../domain';
 
 @Component({
   selector: 'app-smart-shopping-page',
-  imports: [FormsModule, ProductCreateComponent, ProductCardComponent],
+  imports: [FormsModule, ProductCreateComponent, ProductCardComponent, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './smart-shopping.page.html',
   styleUrl: './smart-shopping.page.css',
