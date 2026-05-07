@@ -1,4 +1,9 @@
-import { ExchangeRate, DEFAULT_EXCHANGE_RATE_DATA, DEFAULT_EXCHANGE_RATE_BUY, DEFAULT_EXCHANGE_RATE_SELL } from '../application/exchange-rate';
+import {
+  ExchangeRate,
+  DEFAULT_EXCHANGE_RATE_DATA,
+  DEFAULT_EXCHANGE_RATE_BUY,
+  DEFAULT_EXCHANGE_RATE_SELL,
+} from '../application/exchange-rate';
 
 const EXCHANGE_RATE_KEY = 'property_register_exchange_rate';
 

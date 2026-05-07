@@ -24,8 +24,8 @@ export class CreatePropertyUseCase {
     });
 
     const currency = request.currency || 'PEN';
-    const pricePen = currency === 'PEN' ? (request.pricePen || 0) : (request.priceUsd || 0);
-    const priceUsd = currency === 'USD' ? (request.priceUsd || 0) : 0;
+    const pricePen = currency === 'PEN' ? request.pricePen || 0 : request.priceUsd || 0;
+    const priceUsd = currency === 'USD' ? request.priceUsd || 0 : 0;
 
     return Property.create({
       type: request.type,
@@ -47,11 +47,12 @@ export class CreatePropertyUseCase {
     if (!request.area || request.area <= 0) {
       throw new PropertyInvalidAreaError();
     }
-    
-    const hasPrice = request.currency === 'PEN' 
-      ? (request.pricePen && request.pricePen > 0)
-      : (request.priceUsd && request.priceUsd > 0);
-    
+
+    const hasPrice =
+      request.currency === 'PEN'
+        ? request.pricePen && request.pricePen > 0
+        : request.priceUsd && request.priceUsd > 0;
+
     if (!hasPrice) {
       throw new PropertyInvalidPriceError();
     }

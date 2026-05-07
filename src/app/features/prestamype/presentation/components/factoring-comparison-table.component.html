@@ -1,0 +1,71 @@
+<div class="overflow-x-auto">
+  <table class="w-full text-xs">
+    <thead>
+      <tr class="border-b border-gray-200 dark:border-slate-700">
+        <th
+          class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Tipo
+        </th>
+        <th
+          class="text-left py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Cliente
+        </th>
+        <th
+          class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Promo
+        </th>
+        <th
+          class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Días
+        </th>
+        <th
+          class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Inversión
+        </th>
+        <th
+          class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Factoring
+        </th>
+        <th
+          class="text-right py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Plazo Fijo
+        </th>
+        <th
+          class="text-center py-2.5 px-2 font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-[10px]"
+        >
+          Mejor
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (result of resultados(); track result.factoring.opportunity._id) {
+        <app-factoring-comparison-row
+          [product]="result.factoring.opportunity.product"
+          [promotionWarrantyApplied]="result.factoring.opportunity.promotion_warranty_applied"
+          [clientTradeName]="result.factoring.opportunity.client.tradeName"
+          [clientName]="result.factoring.opportunity.client.name"
+          [clientRating]="result.factoring.opportunity.client.rating"
+          [targetAmount]="result.factoring.opportunity.target_amount"
+          [percentageFinanced]="result.factoring.opportunity.percentage_financed"
+          [factoringDiasRestantes]="result.factoring.diasRestantes"
+          [factoringMontoInvertido]="result.factoring.montoInvertido"
+          [factoringGananciaNeta]="result.factoring.gananciaNeta"
+          [factoringTeaNetaReal]="result.factoring.teaNetaReal"
+          [factoringEsMasRentable]="result.factoring.esMasRentable"
+          [plazoFijoGananciaNeta]="result.plazoFijo.gananciaNeta"
+          [plazoFijoTea]="result.plazoFijo.tea"
+          [plazoFijoEsMasRentable]="result.plazoFijo.esMasRentable"
+          [winner]="result.winner"
+          [montoInversion]="montoInversion()"
+        />
+      }
+    </tbody>
+  </table>
+</div>

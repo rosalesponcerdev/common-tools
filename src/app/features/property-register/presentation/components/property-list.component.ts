@@ -7,60 +7,8 @@ import { PropertyCardComponent } from './property-card.component';
   selector: 'app-property-list',
   imports: [CommonModule, PropertyCardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div>
-      @if (properties().length === 0) {
-        <div class="text-center py-12">
-          <div
-            class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center"
-          >
-            <svg
-              class="w-8 h-8 text-gray-400 dark:text-gray-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-              />
-            </svg>
-          </div>
-          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-1">No hay propiedades</h3>
-          <p class="text-gray-500 dark:text-gray-400">
-            Registra tu primera propiedad para comenzar
-          </p>
-        </div>
-      } @else {
-        <div class="flex items-center justify-between mb-4">
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ properties().length }} {{ properties().length === 1 ? 'propiedad' : 'propiedades' }}
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-          @for (property of properties(); track property.id) {
-            <app-property-card
-              [type]="property.type"
-              [status]="property.status"
-              [area]="property.area"
-              [pricePen]="property.pricePen"
-              [priceUsd]="property.priceUsd"
-              [pricePerSqmUsd]="property.pricePerSqmUsd"
-              [originalCurrency]="property.originalCurrency"
-              [district]="property.location.district"
-              [street]="property.location.street"
-              [mapsUrl]="property.location.mapsUrl ?? ''"
-              [constructionYear]="property.constructionYear ?? 0"
-              [description]="property.description"
-              [isNew]="property.isNew"
-            />
-          }
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './property-list.component.html',
+  styleUrl: './property-list.component.css',
 })
 export class PropertyListComponent {
   readonly properties = input.required<PropertyResponse[]>();

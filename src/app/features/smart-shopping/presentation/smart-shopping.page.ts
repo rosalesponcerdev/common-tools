@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { SmartShoppingFacade } from './smart-shopping.facade';
 import { ProductCreateComponent } from './product-create.component';
 import { ProductCardComponent } from './product-card.component';
@@ -7,106 +8,10 @@ import { UnitOfMeasure } from '../domain';
 
 @Component({
   selector: 'app-smart-shopping-page',
-  imports: [FormsModule, ProductCreateComponent, ProductCardComponent],
+  imports: [FormsModule, ProductCreateComponent, ProductCardComponent, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <!-- Main Container -->
-    <div class="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
-      <div class="max-w-2xl mx-auto px-4 py-6 sm:px-6">
-        <!-- Header -->
-        <header class="mb-6">
-          <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <span>🛒</span>
-            Smart Shopping
-          </h1>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Compara precios por unidad y ahorra
-          </p>
-        </header>
-
-        @if (facade.isLoading()) {
-          <div
-            class="flex flex-col items-center justify-center py-16 text-gray-500 dark:text-gray-400"
-          >
-            <div
-              class="w-8 h-8 border-3 border-gray-200 dark:border-gray-700 border-t-emerald-500 dark:border-t-emerald-400 rounded-full animate-spin mb-4"
-            ></div>
-            <span>Cargando...</span>
-          </div>
-        } @else if (facade.error()) {
-          <div
-            class="flex flex-col items-center justify-center py-16 text-red-600 dark:text-red-400"
-          >
-            <span class="text-3xl mb-2">⚠️</span>
-            <span>{{ facade.error() }}</span>
-          </div>
-        } @else {
-          <!-- Product Tabs -->
-          <div class="flex gap-2 overflow-x-auto pb-3 mb-4 -mx-2 px-2">
-            @for (product of facade.products(); track product.id) {
-              <button
-                class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium rounded-lg border transition-all duration-150 whitespace-nowrap"
-                [class.bg-emerald-600]="facade.selectedProductId() === product.id"
-                [class.text-white]="facade.selectedProductId() === product.id"
-                [class.border-emerald-600]="facade.selectedProductId() === product.id"
-                [class.bg-white]="facade.selectedProductId() !== product.id"
-                [class.text-gray-600]="facade.selectedProductId() !== product.id"
-                [class.border-gray-200]="facade.selectedProductId() !== product.id"
-                [class.hover:text-gray-900]="facade.selectedProductId() !== product.id"
-                [class.hover:border-gray-300]="facade.selectedProductId() !== product.id"
-                [class.dark:bg-slate-800]="facade.selectedProductId() !== product.id"
-                [class.dark:text-gray-300]="facade.selectedProductId() !== product.id"
-                [class.dark:border-slate-700]="facade.selectedProductId() !== product.id"
-                [class.dark:hover:text-white]="facade.selectedProductId() !== product.id"
-                [class.dark:hover:border-slate-600]="facade.selectedProductId() !== product.id"
-                (click)="facade.selectProduct(product.id)"
-              >
-                <span>{{ product.name }}</span>
-                @if (product.presentations.length > 0) {
-                  <span
-                    class="text-xs px-1.5 py-0.5 rounded-full font-medium"
-                    [class.bg-gray-100]="facade.selectedProductId() !== product.id"
-                    [class.text-gray-600]="facade.selectedProductId() !== product.id"
-                    [class.dark:bg-slate-700]="facade.selectedProductId() !== product.id"
-                    [class.dark:text-gray-300]="facade.selectedProductId() !== product.id"
-                  >
-                    {{ product.presentations.length }}
-                  </span>
-                }
-              </button>
-            }
-            @if (facade.products().length === 0) {
-              <span class="text-sm text-gray-500 dark:text-gray-400 py-2">Sin productos</span>
-            }
-          </div>
-
-          @if (facade.selectedProduct()) {
-            <app-product-card
-              [product]="facade.selectedProduct()!"
-              (addPresentation)="onAddPresentation($event)"
-              (deleteProduct)="deleteProduct()"
-              (deletePresentation)="deletePresentation($event)"
-              (createQuickProduct)="createQuickProduct($event)"
-            />
-          } @else {
-            <app-product-create (createProducts)="onCreateProducts($event)" />
-          }
-        }
-      </div>
-    </div>
-  `,
-  styles: `
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `,
+  templateUrl: './smart-shopping.page.html',
+  styleUrl: './smart-shopping.page.css',
 })
 export class SmartShoppingPageComponent implements OnInit {
   readonly facade = inject(SmartShoppingFacade);

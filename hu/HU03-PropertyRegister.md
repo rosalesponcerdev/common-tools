@@ -252,15 +252,15 @@ export interface PropertyFilter {
 export class FilterPropertiesUseCase {
   execute(properties: Property[], filter: PropertyFilter): Property[] {
     let filtered = [...properties];
-    
+
     if (filter.type) {
-      filtered = filtered.filter(p => p.type === filter.type);
+      filtered = filtered.filter((p) => p.type === filter.type);
     }
     if (filter.minPrice !== undefined) {
-      filtered = filtered.filter(p => p.pricePen >= filter.minPrice!);
+      filtered = filtered.filter((p) => p.pricePen >= filter.minPrice!);
     }
     // ... más filtros
-    
+
     // Ordenamiento
     if (filter.sortBy) {
       filtered.sort((a, b) => {
@@ -269,7 +269,7 @@ export class FilterPropertiesUseCase {
         return 0;
       });
     }
-    
+
     return filtered;
   }
 }
@@ -287,7 +287,7 @@ const PROPERTIES_KEY = 'property_register_properties';
 const EXCHANGE_RATE_KEY = 'property_register_exchange_rate';
 
 const DEFAULT_EXCHANGE_RATE = {
-  value: 3.70,
+  value: 3.7,
   updatedAt: new Date().toISOString(),
 };
 ```
@@ -315,10 +315,10 @@ export class PropertyRegisterFacade {
 
   readonly propertiesWithCalculated = computed(() => {
     const rate = this.exchangeRate().value;
-    return this.filteredProperties().map(p => ({
+    return this.filteredProperties().map((p) => ({
       ...p,
       priceUsd: p.pricePen / rate,
-      pricePerSqmUsd: (p.pricePen / rate) / p.area,
+      pricePerSqmUsd: p.pricePen / rate / p.area,
       isNew: p.constructionYear ? p.constructionYear >= new Date().getFullYear() - 2 : false,
     }));
   });
@@ -327,11 +327,11 @@ export class PropertyRegisterFacade {
     const useCase = new CreatePropertyUseCase();
     const property = useCase.execute(request);
     this.propertyRepo.save(property);
-    this.properties.update(list => [...list, property]);
+    this.properties.update((list) => [...list, property]);
   }
 
   updateFilter(filter: Partial<PropertyFilter>): void {
-    this.filter.update(current => ({ ...current, ...filter }));
+    this.filter.update((current) => ({ ...current, ...filter }));
   }
 
   updateExchangeRate(value: number): void {
@@ -440,12 +440,15 @@ export class PropertyDashboardPage {}
 })
 export class PropertyCardComponent {
   readonly property = input.required<Property & PropertyCalculated>();
-  
+
   get statusClass() {
     switch (this.property().status) {
-      case 'disponible': return 'bg-green-100 text-green-800';
-      case 'apartada': return 'bg-yellow-100 text-yellow-800';
-      case 'vendida': return 'bg-gray-100 text-gray-800';
+      case 'disponible':
+        return 'bg-green-100 text-green-800';
+      case 'apartada':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'vendida':
+        return 'bg-gray-100 text-gray-800';
     }
   }
 }
@@ -481,7 +484,12 @@ export class PropertyCardComponent {
       @if (showConstructionYear()) {
         <div>
           <label for="constructionYear">Año de construcción</label>
-          <input type="number" formControlName="constructionYear" id="constructionYear" class="form-input" />
+          <input
+            type="number"
+            formControlName="constructionYear"
+            id="constructionYear"
+            class="form-input"
+          />
         </div>
       }
 
@@ -509,7 +517,12 @@ export class PropertyCardComponent {
 
       <div>
         <label for="description">Descripción</label>
-        <textarea formControlName="description" id="description" class="form-input" rows="3"></textarea>
+        <textarea
+          formControlName="description"
+          id="description"
+          class="form-input"
+          rows="3"
+        ></textarea>
       </div>
 
       <div>
@@ -606,9 +619,7 @@ export const PROPERTY_REGISTER_ROUTES: Routes = [
     path: '',
     providers: [providePropertyRegister()],
     loadComponent: () =>
-      import('./presentation/pages/property-dashboard.page').then(
-        (m) => m.PropertyDashboardPage
-      ),
+      import('./presentation/pages/property-dashboard.page').then((m) => m.PropertyDashboardPage),
   },
 ];
 ```
@@ -682,13 +693,13 @@ export const providePropertyRegister = (): Provider[] => {
 
 ## 12. Validaciones
 
-| Campo | Validación |
-|-------|------------|
-| Tipo | Obligatorio, uno de: terreno/casa/departamento |
-| Área | Obligatorio, > 0 |
-| Precio PEN | Obligatorio, > 0 |
-| Distrito | Obligatorio |
-| Calle | Obligatorio |
-| Año construcción | Obligatorio si tipo=casa o tipo=departamento |
-| Estado | Obligatorio, uno de: disponible/apartada/vendida |
-| Link Maps | Opcional, URL válida |
+| Campo            | Validación                                       |
+| ---------------- | ------------------------------------------------ |
+| Tipo             | Obligatorio, uno de: terreno/casa/departamento   |
+| Área             | Obligatorio, > 0                                 |
+| Precio PEN       | Obligatorio, > 0                                 |
+| Distrito         | Obligatorio                                      |
+| Calle            | Obligatorio                                      |
+| Año construcción | Obligatorio si tipo=casa o tipo=departamento     |
+| Estado           | Obligatorio, uno de: disponible/apartada/vendida |
+| Link Maps        | Opcional, URL válida                             |
