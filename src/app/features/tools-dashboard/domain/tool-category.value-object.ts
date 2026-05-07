@@ -4,7 +4,8 @@ export type ToolCategory =
   | 'conversores'
   | 'utilidades'
   | 'prestamype'
-  | 'ahorro';
+  | 'ahorro'
+  | 'inmuebles';
 
 export const TOOL_CATEGORIES: { value: ToolCategory | 'todas'; label: string }[] = [
   { value: 'todas', label: 'Todas' },
@@ -14,4 +15,5 @@ export const TOOL_CATEGORIES: { value: ToolCategory | 'todas'; label: string }[]
   { value: 'utilidades', label: 'Utilidades' },
   { value: 'prestamype', label: 'Prestamype' },
   { value: 'ahorro', label: 'Ahorro' },
+  { value: 'inmuebles', label: 'Inmuebles' },
 ];
