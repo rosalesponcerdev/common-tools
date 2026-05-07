@@ -10,39 +10,39 @@ El modo oscuro incorpora tonos slate profundos que mantienen la legibilidad mien
 
 ### Light Mode
 
-| Color Name | Hex Code | Role |
-|------------|----------|------|
+| Color Name       | Hex Code  | Role                                                               |
+| ---------------- | --------- | ------------------------------------------------------------------ |
 | Emerald Profundo | `#059669` | Color primario para acciones principales, links y acentos de marca |
-| Emerald Oscuro | `#047857` | Estado hover del color primario |
-| Emerald Suave | `#d1fae5` | Fondo de badges exitosos y acentos sutiles |
-| Gris Pizarra | `#111827` | Texto principal de alto contraste |
-| Gris Piedra | `#4b5563` | Texto secundario para descripciones |
-| Gris Ceniza | `#6b7280` | Texto terciario, placeholders |
-| Borde Suave | `#e5e7eb` | Bordes de tarjetas, inputs, divisores |
-| Fondo Algodón | `#f8f9fa` | Fondo general de la aplicación |
-| Superficie Pura | `#ffffff` | Fondo de cards, paneles, componentes elevados |
+| Emerald Oscuro   | `#047857` | Estado hover del color primario                                    |
+| Emerald Suave    | `#d1fae5` | Fondo de badges exitosos y acentos sutiles                         |
+| Gris Pizarra     | `#111827` | Texto principal de alto contraste                                  |
+| Gris Piedra      | `#4b5563` | Texto secundario para descripciones                                |
+| Gris Ceniza      | `#6b7280` | Texto terciario, placeholders                                      |
+| Borde Suave      | `#e5e7eb` | Bordes de tarjetas, inputs, divisores                              |
+| Fondo Algodón    | `#f8f9fa` | Fondo general de la aplicación                                     |
+| Superficie Pura  | `#ffffff` | Fondo de cards, paneles, componentes elevados                      |
 
 ### Semantic Colors
 
-| Color Name | Hex Code | Role |
-|------------|----------|------|
-| Ámbar Cálido | `#d97706` | Advertencias, estados de precaución |
-| Crema Almería | `#fef3c7` | Fondo de advertencias |
-| Rojo Intenso | `#dc2626` | Errores, acciones destructivas |
-| Rosa Pálido | `#fee2e2` | Fondo de errores |
+| Color Name    | Hex Code  | Role                                |
+| ------------- | --------- | ----------------------------------- |
+| Ámbar Cálido  | `#d97706` | Advertencias, estados de precaución |
+| Crema Almería | `#fef3c7` | Fondo de advertencias               |
+| Rojo Intenso  | `#dc2626` | Errores, acciones destructivas      |
+| Rosa Pálido   | `#fee2e2` | Fondo de errores                    |
 
 ### Dark Mode
 
-| Color Name | Hex Code | Role |
-|------------|----------|------|
+| Color Name       | Hex Code  | Role                          |
+| ---------------- | --------- | ----------------------------- |
 | Emerald Luminoso | `#34d399` | Color primario en modo oscuro |
-| Emerald Brillo | `#6ee7b7` | Estado hover en modo oscuro |
-| Slate Carbón | `#0f172a` | Fondo principal oscuro |
-| Slate Grafito | `#1e293b` | Superficie de cards y paneles |
-| Blanco Hueso | `#f1f5f9` | Texto principal oscuro |
-| Gris Luminoso | `#cbd5e1` | Texto secundario oscuro |
-| Gris Plomo | `#94a3b8` | Texto terciario oscuro |
-| Borde Carbón | `#334155` | Bordes en modo oscuro |
+| Emerald Brillo   | `#6ee7b7` | Estado hover en modo oscuro   |
+| Slate Carbón     | `#0f172a` | Fondo principal oscuro        |
+| Slate Grafito    | `#1e293b` | Superficie de cards y paneles |
+| Blanco Hueso     | `#f1f5f9` | Texto principal oscuro        |
+| Gris Luminoso    | `#cbd5e1` | Texto secundario oscuro       |
+| Gris Plomo       | `#94a3b8` | Texto terciario oscuro        |
+| Borde Carbón     | `#334155` | Bordes en modo oscuro         |
 
 ## 3. Typography Rules
 

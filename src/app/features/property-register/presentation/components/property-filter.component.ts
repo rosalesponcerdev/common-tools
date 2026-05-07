@@ -1,4 +1,12 @@
-import { Component, input, output, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  signal,
+  computed,
+  effect,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import { PropertyFilter } from '../../application/filter-properties.use-case';
 import { PROPERTY_TYPES, PropertyType } from '../../domain/property-type.value-object';
@@ -87,7 +95,7 @@ export class PropertyFilterComponent {
       sortBy: ext.sortBy || 'createdAt',
       sortOrder: ext.sortOrder || 'desc',
     };
-    
+
     // Check if different
     if (JSON.stringify(current) !== JSON.stringify(newValues)) {
       this.model.set(newValues);

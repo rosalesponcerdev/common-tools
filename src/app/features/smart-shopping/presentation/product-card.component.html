@@ -66,16 +66,8 @@
       (click)="deleteProduct.emit()"
       title="Eliminar"
     >
-      <svg
-        class="w-5 h-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
-        />
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
       </svg>
     </button>
   </header>
@@ -106,12 +98,8 @@
   <!-- Comparison Table -->
   <div class="border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden">
     <!-- Desktop Header -->
-    <div
-      class="hidden sm:grid grid-cols-12 gap-2 lg:gap-4 px-4 py-3 bg-gray-900 dark:bg-slate-800"
-    >
-      <span class="col-span-3 text-xs font-bold text-white uppercase tracking-wider"
-        >Marca</span
-      >
+    <div class="hidden sm:grid grid-cols-12 gap-2 lg:gap-4 px-4 py-3 bg-gray-900 dark:bg-slate-800">
+      <span class="col-span-3 text-xs font-bold text-white uppercase tracking-wider">Marca</span>
       <span class="col-span-2 text-center text-xs font-bold text-white uppercase tracking-wider"
         >Cantidad</span
       >
@@ -133,7 +121,7 @@
           [class.bg-emerald-50]="cheapestPresentation()?.id === pres.id"
           [class.dark:bg-emerald-900/20]="cheapestPresentation()?.id === pres.id"
           [style.animation-delay]="i * 30 + 'ms'"
-          style="animation: slideIn 0.3s ease-out forwards; opacity: 0;"
+          style="animation: slideIn 0.3s ease-out forwards; opacity: 0"
         >
           <div class="sm:col-span-3 flex justify-center sm:items-center gap-2">
             @if (cheapestPresentation()?.id === pres.id) {

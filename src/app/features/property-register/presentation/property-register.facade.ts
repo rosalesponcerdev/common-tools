@@ -6,7 +6,12 @@ import {
   CreatePropertyRequest,
   UpdatePropertyRequest,
 } from '../application/dtos/property-request.dto';
-import { PropertyFilter, DEFAULT_FILTER, SortBy, SortOrder } from '../application/filter-properties.use-case';
+import {
+  PropertyFilter,
+  DEFAULT_FILTER,
+  SortBy,
+  SortOrder,
+} from '../application/filter-properties.use-case';
 import { ExchangeRate, DEFAULT_EXCHANGE_RATE_DATA } from '../application/exchange-rate';
 import { CreatePropertyUseCase } from '../application/create-property.use-case';
 import { FilterPropertiesUseCase } from '../application/filter-properties.use-case';
@@ -16,9 +21,11 @@ import { ExchangeRateStorage } from '../infrastructure/exchange-rate.storage';
 
 @Injectable()
 export class PropertyRegisterFacade {
-  private readonly propertyRepository = inject(PropertyRepository, { optional: true }) ?? new PropertyLocalStorageRepository();
-  private readonly exchangeRateStorage = inject(ExchangeRateStorage, { optional: true }) ?? new ExchangeRateStorage();
-  
+  private readonly propertyRepository =
+    inject(PropertyRepository, { optional: true }) ?? new PropertyLocalStorageRepository();
+  private readonly exchangeRateStorage =
+    inject(ExchangeRateStorage, { optional: true }) ?? new ExchangeRateStorage();
+
   private readonly createPropertyUseCase = new CreatePropertyUseCase();
   private readonly filterPropertiesUseCase = new FilterPropertiesUseCase();
   private readonly calculateMetricsUseCase = new CalculatePropertyMetricsUseCase();
@@ -43,15 +50,12 @@ export class PropertyRegisterFacade {
   readonly stats = computed(() => {
     const withMetrics = this.propertiesWithMetrics();
     const total = withMetrics.length;
-    const disponible = withMetrics.filter(p => p.status === 'disponible').length;
-    const apartada = withMetrics.filter(p => p.status === 'apartada').length;
-    const vendida = withMetrics.filter(p => p.status === 'vendida').length;
-    const avgPricePerSqm = total > 0
-      ? withMetrics.reduce((sum, p) => sum + p.pricePerSqmUsd, 0) / total
-      : 0;
-    const avgArea = total > 0
-      ? withMetrics.reduce((sum, p) => sum + p.area, 0) / total
-      : 0;
+    const disponible = withMetrics.filter((p) => p.status === 'disponible').length;
+    const apartada = withMetrics.filter((p) => p.status === 'apartada').length;
+    const vendida = withMetrics.filter((p) => p.status === 'vendida').length;
+    const avgPricePerSqm =
+      total > 0 ? withMetrics.reduce((sum, p) => sum + p.pricePerSqmUsd, 0) / total : 0;
+    const avgArea = total > 0 ? withMetrics.reduce((sum, p) => sum + p.area, 0) / total : 0;
 
     return {
       total,
@@ -72,7 +76,7 @@ export class PropertyRegisterFacade {
     try {
       const properties = this.propertyRepository.getAll();
       this.properties.set(properties);
-      
+
       const exchangeRate = this.exchangeRateStorage.get();
       this.exchangeRate.set(exchangeRate);
     } catch (e) {
@@ -87,7 +91,7 @@ export class PropertyRegisterFacade {
     try {
       const property = this.createPropertyUseCase.execute(request);
       this.propertyRepository.save(property);
-      this.properties.update(list => [...list, property]);
+      this.properties.update((list) => [...list, property]);
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'Error al crear propiedad');
     }
@@ -108,9 +112,7 @@ export class PropertyRegisterFacade {
       });
 
       this.propertyRepository.update(updated);
-      this.properties.update(list =>
-        list.map(p => p.id === request.id ? updated : p)
-      );
+      this.properties.update((list) => list.map((p) => (p.id === request.id ? updated : p)));
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'Error al actualizar propiedad');
     }
@@ -120,14 +122,14 @@ export class PropertyRegisterFacade {
     this.error.set(null);
     try {
       this.propertyRepository.delete(id);
-      this.properties.update(list => list.filter(p => p.id !== id));
+      this.properties.update((list) => list.filter((p) => p.id !== id));
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'Error al eliminar propiedad');
     }
   }
 
   updateFilter(update: Partial<PropertyFilter>): void {
-    this.filter.update(current => ({ ...current, ...update }));
+    this.filter.update((current) => ({ ...current, ...update }));
   }
 
   clearFilter(): void {
@@ -165,6 +167,6 @@ export class PropertyRegisterFacade {
   }
 
   getPropertyById(id: string): Property | null {
-    return this.properties().find(p => p.id === id) ?? null;
+    return this.properties().find((p) => p.id === id) ?? null;
   }
 }

@@ -4,6 +4,6 @@ export class GetPropertiesUseCase {
   constructor(private readonly getAll: () => Property[]) {}
 
   execute(): Property[] {
-    return this.getAll().map(p => p);
+    return this.getAll().map((p) => p);
   }
 }

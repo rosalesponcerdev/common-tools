@@ -53,10 +53,7 @@ export class Location {
   }
 
   equals(other: Location): boolean {
-    return (
-      this.props.district === other.props.district &&
-      this.props.street === other.props.street
-    );
+    return this.props.district === other.props.district && this.props.street === other.props.street;
   }
 
   toPlain(): LocationProps {

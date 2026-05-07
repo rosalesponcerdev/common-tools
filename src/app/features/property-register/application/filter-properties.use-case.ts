@@ -33,15 +33,11 @@ export class FilterPropertiesUseCase {
     }
 
     if (filter.minPrice !== undefined) {
-      filtered = filtered.filter(
-        (p) => p.pricePen / exchangeRate >= filter.minPrice!
-      );
+      filtered = filtered.filter((p) => p.pricePen / exchangeRate >= filter.minPrice!);
     }
 
     if (filter.maxPrice !== undefined) {
-      filtered = filtered.filter(
-        (p) => p.pricePen / exchangeRate <= filter.maxPrice!
-      );
+      filtered = filtered.filter((p) => p.pricePen / exchangeRate <= filter.maxPrice!);
     }
 
     if (filter.minArea !== undefined) {
@@ -54,21 +50,17 @@ export class FilterPropertiesUseCase {
 
     if (filter.yearFrom !== undefined) {
       filtered = filtered.filter(
-        (p) => p.constructionYear && p.constructionYear >= filter.yearFrom!
+        (p) => p.constructionYear && p.constructionYear >= filter.yearFrom!,
       );
     }
 
     if (filter.yearTo !== undefined) {
-      filtered = filtered.filter(
-        (p) => p.constructionYear && p.constructionYear <= filter.yearTo!
-      );
+      filtered = filtered.filter((p) => p.constructionYear && p.constructionYear <= filter.yearTo!);
     }
 
     if (filter.district) {
       const districtLower = filter.district.toLowerCase();
-      filtered = filtered.filter(
-        (p) => p.location.district.toLowerCase().includes(districtLower)
-      );
+      filtered = filtered.filter((p) => p.location.district.toLowerCase().includes(districtLower));
     }
 
     if (filter.status) {
@@ -89,9 +81,7 @@ export class FilterPropertiesUseCase {
           case 'area':
             return (a.area - b.area) * order;
           case 'createdAt':
-            return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            ) * order;
+            return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()) * order;
           default:
             return 0;
         }

@@ -1,0 +1,109 @@
+<tr
+  class="border-b border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors"
+  [class.bg-red-50]="excedeMonto()"
+  [class.dark:bg-red-900/10]="excedeMonto()"
+>
+  <!-- Tipo -->
+  <td class="py-2 px-2">
+    <span
+      class="text-[10px] px-1.5 py-0.5 rounded font-semibold"
+      [class]="productClass()"
+    >
+      {{ result().factoring.opportunity.product === 'factoring' ? 'F' : 'C' }}
+    </span>
+  </td>
+
+  <!-- Cliente -->
+  <td class="py-2 px-2">
+    <div class="flex items-center gap-1.5">
+      <div class="flex flex-col gap-1">
+        <span
+          class="font-medium text-gray-900 dark:text-white truncate max-w-[160px]"
+          [title]="result().factoring.opportunity.client.tradeName"
+        >
+          {{ result().factoring.opportunity.client.tradeName }}
+        </span>
+        <span
+          class="font-light text-[10px] text-gray-500 dark:text-white truncate max-w-[160px]"
+          [title]="result().factoring.opportunity.client.name"
+        >
+          {{ result().factoring.opportunity.client.name }}
+        </span>
+      </div>
+      <span
+        class="text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
+        [class]="ratingClass()"
+      >
+        {{ result().factoring.opportunity.client.rating }}
+      </span>
+    </div>
+    <div class="text-[10px] text-gray-400 dark:text-gray-500">
+      max S/ {{ montoMaximo() | number: '1.0-0' }}
+      @if (excedeMonto()) {
+        <span class="text-red-500 font-semibold">(⚠)</span>
+      }
+    </div>
+  </td>
+
+  <!-- Promo -->
+  <td class="py-2 px-2 text-center">
+    @if (result().factoring.opportunity.promotion_warranty_applied) {
+      <span class="text-sm" title="Con garantía">🛡️</span>
+    }
+  </td>
+
+  <!-- Días -->
+  <td class="text-right py-2 px-3 text-gray-500 dark:text-gray-400 font-medium">
+    {{ result().factoring.diasRestantes }}
+  </td>
+
+  <!-- Inversión -->
+  <td class="text-right py-2 px-3">
+    <span class="text-gray-700 dark:text-gray-300 font-medium">
+      {{ result().factoring.montoInvertido | number: '1.0-0' }}
+    </span>
+  </td>
+
+  <!-- Factoring -->
+  <td class="text-right py-2 px-3">
+    <span
+      class="font-bold"
+      [class.text-emerald-600]="factoringWinner()"
+      [class.dark:text-emerald-400]="factoringWinner()"
+      [class.text-gray-400]="!factoringWinner()"
+      [class.dark:text-gray-500]="!factoringWinner()"
+    >
+      {{ result().factoring.gananciaNeta | number: '1.2-2' }}
+    </span>
+    <div class="text-[10px] text-gray-400 dark:text-gray-500">
+      {{ result().factoring.teaNetaReal * 100 | number: '1.1-1' }}% TEA
+    </div>
+  </td>
+
+  <!-- Plazo Fijo -->
+  <td class="text-right py-2 px-3">
+    <span
+      class="font-bold"
+      [class.text-emerald-600]="plazoFijoWinner()"
+      [class.dark:text-emerald-400]="plazoFijoWinner()"
+      [class.text-gray-400]="!plazoFijoWinner()"
+      [class.dark:text-gray-500]="!plazoFijoWinner()"
+    >
+      {{ result().plazoFijo.gananciaNeta | number: '1.2-2' }}
+    </span>
+    <div class="text-[10px] text-gray-400 dark:text-gray-500">
+      {{ result().plazoFijo.tea * 100 | number: '1.1-1' }}% TEA
+    </div>
+  </td>
+
+  <!-- Winner -->
+  <td class="text-center py-2 px-3">
+    @if (excedeMonto()) {
+      <span class="text-xs font-bold text-red-600 dark:text-red-400">⚠️</span>
+    } @else if (result().winner === 'factoring') {
+      <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">📄</span>
+    } @else {
+      <span class="text-xs font-bold text-amber-600 dark:text-amber-400">🏦</span>
+    }
+  </td>
+</tr>
