@@ -60,7 +60,7 @@ function parseOpportunities(json: string): ParsedOpportunities {
       const validCurrency = ['USD', 'PEN'].includes(item.currency);
       const validProduct = ['factoring', 'confirming'].includes(item.product);
 
-      if (!validRating) {
+      if (item.promotion_warranty_applied && !validRating) {
         errors.push(`Fila ${parsed.indexOf(item) + 1}: rating inválido`);
         continue;
       }
@@ -82,7 +82,7 @@ function parseOpportunities(json: string): ParsedOpportunities {
         client: {
           tradeName: item.client.trade_name,
           name: item.client.name,
-          rating: item.client.rating,
+          rating: item.client.rating ?? 'A+',
         },
         target_amount: item.target_amount,
         currency: item.currency,
